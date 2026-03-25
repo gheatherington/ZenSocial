@@ -78,33 +78,31 @@
 
 ## Traceability
 
-Populated during roadmap creation.
-
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| SHELL-01 | — | Pending |
-| SHELL-02 | — | Pending |
-| SHELL-03 | — | Pending |
-| WEB-01 | — | Pending |
-| WEB-02 | — | Pending |
-| WEB-03 | — | Pending |
-| WEB-04 | — | Pending |
-| WEB-05 | — | Pending |
-| INJ-01 | — | Pending |
-| INJ-02 | — | Pending |
-| INJ-03 | — | Pending |
-| INJ-04 | — | Pending |
-| BLOCK-01 | — | Pending |
-| BLOCK-02 | — | Pending |
-| BLOCK-03 | — | Pending |
-| SET-01 | — | Pending |
-| SET-02 | — | Pending |
+| SHELL-01 | Phase 1 | Pending |
+| SHELL-02 | Phase 1 | Pending |
+| SHELL-03 | Phase 1 | Pending |
+| WEB-01 | Phase 1 | Pending |
+| WEB-02 | Phase 1 | Pending |
+| WEB-03 | Phase 1 | Pending |
+| WEB-04 | Phase 1 | Pending |
+| WEB-05 | Phase 1 | Pending |
+| BLOCK-03 | Phase 1 | Pending |
+| INJ-01 | Phase 2 | Pending |
+| INJ-02 | Phase 2 | Pending |
+| INJ-03 | Phase 2 | Pending |
+| INJ-04 | Phase 2 | Pending |
+| BLOCK-01 | Phase 3 | Pending |
+| BLOCK-02 | Phase 3 | Pending |
+| SET-01 | Phase 4 | Pending |
+| SET-02 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 17 total
-- Mapped to phases: 0 (pending roadmap)
-- Unmapped: 17 ⚠️
+- Mapped to phases: 17
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-24*
-*Last updated: 2026-03-24 after initial definition*
+*Last updated: 2026-03-24 after roadmap creation*
