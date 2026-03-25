@@ -10,7 +10,6 @@ struct PlatformTabView: View {
             // Base: always render PlatformWebView (keeps WKWebView alive)
             // Hidden behind error screen when in error state
             PlatformWebView(platform: platform, state: state)
-                .ignoresSafeArea(.all, edges: .top)
 
             // Loading overlay (SHELL-02, per UI-SPEC Loading Indicator)
             if state.loadingState == .loading {

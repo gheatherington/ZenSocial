@@ -40,20 +40,26 @@ class WebViewCoordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
             return .allow
         }
 
-        // Auth domains -> modal (D-07)
+        // Platform's own domains -> always allow in-place (checked first so
+        // subdomains like login.instagram.com aren't incorrectly intercepted)
+        if platform.isOwnDomain(host) {
+            return .allow
+        }
+
+        // Auth domains for external providers -> modal (D-07)
         if AuthDomains.isAuthDomain(host) {
             state.pendingAuthURL = url
             return .cancel
         }
 
-        // Platform's own domains -> allow in-place navigation
-        if platform.isOwnDomain(host) {
-            return .allow
+        // Non-HTTP/HTTPS schemes (tel:, mailto:) -> system handler
+        // All other web URLs stay in the web view to avoid breaking auth flows
+        if let scheme = url.scheme?.lowercased(), scheme != "https" && scheme != "http" {
+            await UIApplication.shared.open(url)
+            return .cancel
         }
 
-        // External non-auth domains -> system browser (per UI-SPEC)
-        await UIApplication.shared.open(url)
-        return .cancel
+        return .allow
     }
 
     // MARK: - Navigation Events (SHELL-02, SHELL-03 state transitions)

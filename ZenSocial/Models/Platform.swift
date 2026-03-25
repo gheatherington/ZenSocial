@@ -31,9 +31,13 @@ enum Platform: String, CaseIterable, Identifiable {
         switch self {
         case .instagram:
             return host.hasSuffix("instagram.com") || host.hasSuffix("cdninstagram.com")
+                || host.hasSuffix("facebook.com") || host.hasSuffix("fbsbx.com")
+                || host.hasSuffix("fbcdn.net")
         case .youtube:
             return host.hasSuffix("youtube.com") || host.hasSuffix("googlevideo.com")
-                || host.hasSuffix("ytimg.com")
+                || host.hasSuffix("ytimg.com") || host.hasSuffix("google.com")
+                || host.hasSuffix("googleapis.com") || host.hasSuffix("gstatic.com")
+                || host.hasSuffix("ggpht.com")
         }
     }
 }
