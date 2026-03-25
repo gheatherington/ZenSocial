@@ -13,11 +13,11 @@
 
 ### Web Rendering
 
-- [ ] **WEB-01**: User can browse Instagram via WKWebView with full platform functionality
-- [ ] **WEB-02**: User can browse YouTube via WKWebView with full platform functionality
+- [x] **WEB-01**: User can browse Instagram via WKWebView with full platform functionality
+- [x] **WEB-02**: User can browse YouTube via WKWebView with full platform functionality
 - [ ] **WEB-03**: User stays logged in to both platforms across app launches (persistent sessions)
-- [ ] **WEB-04**: User can navigate within each platform (back/forward swipe, back button)
-- [ ] **WEB-05**: User can pull-to-refresh to reload the current platform page
+- [x] **WEB-04**: User can navigate within each platform (back/forward swipe, back button)
+- [x] **WEB-05**: User can pull-to-refresh to reload the current platform page
 
 ### Injection Engine
 
@@ -83,11 +83,11 @@
 | SHELL-01 | Phase 1 | Pending |
 | SHELL-02 | Phase 1 | Pending |
 | SHELL-03 | Phase 1 | Pending |
-| WEB-01 | Phase 1 | Pending |
-| WEB-02 | Phase 1 | Pending |
+| WEB-01 | Phase 1 | Complete |
+| WEB-02 | Phase 1 | Complete |
 | WEB-03 | Phase 1 | Pending |
-| WEB-04 | Phase 1 | Pending |
-| WEB-05 | Phase 1 | Pending |
+| WEB-04 | Phase 1 | Complete |
+| WEB-05 | Phase 1 | Complete |
 | BLOCK-03 | Phase 1 | Pending |
 | INJ-01 | Phase 2 | Pending |
 | INJ-02 | Phase 2 | Pending |

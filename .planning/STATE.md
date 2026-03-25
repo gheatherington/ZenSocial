@@ -2,16 +2,16 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: planning
-stopped_at: Phase 1 plans complete — ready to execute
-last_updated: "2026-03-25T02:13:15.349Z"
-last_activity: 2026-03-24 -- Roadmap created (4 phases, 17 requirements mapped)
+status: executing
+stopped_at: Completed 01-02-PLAN.md
+last_updated: "2026-03-25T10:34:59Z"
+last_activity: 2026-03-25 -- Completed Plan 01-02 (WKWebView wrapper + auth modal)
 progress:
   total_phases: 4
   completed_phases: 0
-  total_plans: 0
-  completed_plans: 0
-  percent: 0
+  total_plans: 3
+  completed_plans: 2
+  percent: 33
 ---
 
 # Project State
@@ -26,30 +26,30 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 ## Current Position
 
 Phase: 1 of 4 (Native Shell + WKWebView Foundation)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-03-24 -- Roadmap created (4 phases, 17 requirements mapped)
+Plan: 3 of 3 in current phase
+Status: Executing
+Last activity: 2026-03-25 -- Completed Plan 01-02 (WKWebView wrapper + auth modal)
 
-Progress: [░░░░░░░░░░] 0%
+Progress: [███░░░░░░░] 33%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 0
-- Average duration: -
-- Total execution time: 0 hours
+- Total plans completed: 2
+- Average duration: ~3min
+- Total execution time: ~6 min
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| - | - | - | - |
+| 01 | 2/3 | ~6min | ~3min |
 
 **Recent Trend:**
 
-- Last 5 plans: -
-- Trend: -
+- Last 5 plans: 01-01 (3min), 01-02 (3min)
+- Trend: Stable
 
 *Updated after each plan completion*
 
@@ -63,6 +63,8 @@ Recent decisions affecting current work:
 - [Roadmap]: 4-phase build order following research recommendation -- shell first, injection second, blocking third, settings fourth
 - [Roadmap]: BLOCK-03 (user-agent spoofing) placed in Phase 1 because Instagram requires it to function at all
 - [Roadmap]: WKWebView config is immutable after init -- all architectural decisions must land in Phase 1
+- [Phase 01]: Used async decidePolicyFor variant for Swift 6 strict concurrency
+- [Phase 01]: Auth modal shares platform WKWebsiteDataStore so login cookies persist correctly
 
 ### Pending Todos
 
@@ -74,6 +76,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-25T02:13:15.347Z
-Stopped at: Phase 1 UI-SPEC approved
-Resume file: .planning/phases/01-native-shell-wkwebview-foundation/01-UI-SPEC.md
+Last session: 2026-03-25T10:34:59Z
+Stopped at: Completed 01-02-PLAN.md
+Resume file: .planning/phases/01-native-shell-wkwebview-foundation/01-03-PLAN.md
