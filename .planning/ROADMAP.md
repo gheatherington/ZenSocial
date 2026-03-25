@@ -33,7 +33,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 Plans:
 - [x] 01-01-PLAN.md — Xcode project + models, services, and configuration foundation
-- [x] 01-02-PLAN.md — WKWebView wrapper, navigation coordinator, and auth modal
+- [ ] 01-02-PLAN.md — WKWebView wrapper, navigation coordinator, and auth modal
 - [ ] 01-03-PLAN.md — App shell UI (TabView, loading/error states) + human verification
 
 **UI hint**: yes

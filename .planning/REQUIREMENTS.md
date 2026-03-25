@@ -9,13 +9,13 @@
 
 - [ ] **SHELL-01**: User can switch between Instagram and YouTube via a native tab bar
 - [ ] **SHELL-02**: User sees a native loading indicator while web content loads per platform
-- [ ] **SHELL-03**: User sees a native offline/error screen when a platform fails to load
+- [x] **SHELL-03**: User sees a native offline/error screen when a platform fails to load
 
 ### Web Rendering
 
 - [x] **WEB-01**: User can browse Instagram via WKWebView with full platform functionality
 - [x] **WEB-02**: User can browse YouTube via WKWebView with full platform functionality
-- [ ] **WEB-03**: User stays logged in to both platforms across app launches (persistent sessions)
+- [x] **WEB-03**: User stays logged in to both platforms across app launches (persistent sessions)
 - [x] **WEB-04**: User can navigate within each platform (back/forward swipe, back button)
 - [x] **WEB-05**: User can pull-to-refresh to reload the current platform page
 
@@ -30,7 +30,7 @@
 
 - [ ] **BLOCK-01**: Instagram Reels tab is hidden on initial load and across SPA navigation
 - [ ] **BLOCK-02**: YouTube Shorts tab is hidden on initial load and across SPA navigation
-- [ ] **BLOCK-03**: User-agent is spoofed to a Safari UA to prevent Instagram/YouTube from detecting WKWebView
+- [x] **BLOCK-03**: User-agent is spoofed to a Safari UA to prevent Instagram/YouTube from detecting WKWebView
 
 ### Settings
 
@@ -82,13 +82,13 @@
 |-------------|-------|--------|
 | SHELL-01 | Phase 1 | Pending |
 | SHELL-02 | Phase 1 | Pending |
-| SHELL-03 | Phase 1 | Pending |
+| SHELL-03 | Phase 1 | Complete |
 | WEB-01 | Phase 1 | Complete |
 | WEB-02 | Phase 1 | Complete |
-| WEB-03 | Phase 1 | Pending |
+| WEB-03 | Phase 1 | Complete |
 | WEB-04 | Phase 1 | Complete |
 | WEB-05 | Phase 1 | Complete |
-| BLOCK-03 | Phase 1 | Pending |
+| BLOCK-03 | Phase 1 | Complete |
 | INJ-01 | Phase 2 | Pending |
 | INJ-02 | Phase 2 | Pending |
 | INJ-03 | Phase 2 | Pending |
