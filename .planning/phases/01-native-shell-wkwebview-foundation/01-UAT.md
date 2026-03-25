@@ -41,9 +41,10 @@ skipped: 0
 ## Gaps
 
 - truth: "PlatformWebView.swift, WebViewCoordinator.swift, and AuthModalView.swift are compiled into the app and visible in Xcode Project Navigator"
-  status: failed
+  status: resolved
   reason: "User reported: files not visible in Xcode. Confirmed via grep: 0 references to these files in project.pbxproj. Files exist on disk but were never added to the Xcode project."
+  fix: "Added PBXFileReference, PBXBuildFile, PBXGroup, and PBXSourcesBuildPhase entries in project.pbxproj. Views group created for AuthModalView.swift. Build verified: BUILD SUCCEEDED. Commit: f6ecd73."
   severity: major
   test: 4
   artifacts: [ZenSocial.xcodeproj/project.pbxproj]
-  missing: [PlatformWebView.swift in Sources build phase, WebViewCoordinator.swift in Sources build phase, AuthModalView.swift in Sources build phase]
+  missing: []
