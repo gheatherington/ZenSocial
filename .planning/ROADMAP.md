@@ -29,7 +29,13 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. User can browse YouTube subscriptions, channels, and videos with full functionality including video playback
   4. User remains logged in to both platforms after force-quitting and relaunching the app
   5. User sees a native loading indicator while pages load and a native error screen when offline or when a platform fails
-**Plans**: TBD
+**Plans**: 3 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Xcode project + models, services, and configuration foundation
+- [ ] 01-02-PLAN.md — WKWebView wrapper, navigation coordinator, and auth modal
+- [ ] 01-03-PLAN.md — App shell UI (TabView, loading/error states) + human verification
+
 **UI hint**: yes
 
 ### Phase 2: Injection Engine + Dark Theme
@@ -71,7 +77,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Native Shell + WKWebView Foundation | 0/TBD | Not started | - |
+| 1. Native Shell + WKWebView Foundation | 0/3 | Planning complete | - |
 | 2. Injection Engine + Dark Theme | 0/TBD | Not started | - |
 | 3. Feature Blocking | 0/TBD | Not started | - |
 | 4. Settings UI | 0/TBD | Not started | - |
