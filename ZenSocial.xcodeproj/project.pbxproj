@@ -19,6 +19,9 @@
 		A100000A /* PlatformWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000A /* PlatformWebView.swift */; };
 		A100000B /* WebViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000B /* WebViewCoordinator.swift */; };
 		A100000C /* AuthModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000C /* AuthModalView.swift */; };
+		A100000D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000D /* ContentView.swift */; };
+		A100000E /* PlatformTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000E /* PlatformTabView.swift */; };
+		A100000F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000F /* ErrorView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		A200000A /* PlatformWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformWebView.swift; sourceTree = "<group>"; };
 		A200000B /* WebViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCoordinator.swift; sourceTree = "<group>"; };
 		A200000C /* AuthModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModalView.swift; sourceTree = "<group>"; };
+		A200000D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A200000E /* PlatformTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformTabView.swift; sourceTree = "<group>"; };
+		A200000F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
 		A3000001 /* ZenSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -111,6 +117,9 @@
 			isa = PBXGroup;
 			children = (
 				A200000C /* AuthModalView.swift */,
+				A200000D /* ContentView.swift */,
+				A200000E /* PlatformTabView.swift */,
+				A200000F /* ErrorView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +212,9 @@
 				A100000A /* PlatformWebView.swift in Sources */,
 				A100000B /* WebViewCoordinator.swift in Sources */,
 				A100000C /* AuthModalView.swift in Sources */,
+				A100000D /* ContentView.swift in Sources */,
+				A100000E /* PlatformTabView.swift in Sources */,
+				A100000F /* ErrorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

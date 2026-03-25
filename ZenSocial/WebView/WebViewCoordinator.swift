@@ -11,6 +11,21 @@ class WebViewCoordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
         self.platform = platform
         self.state = state
         super.init()
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleReloadNotification(_:)),
+            name: .zenSocialReload,
+            object: platform.rawValue
+        )
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
+    @objc private func handleReloadNotification(_ notification: Notification) {
+        webView?.reload()
     }
 
     // MARK: - Navigation Policy (D-07, D-08, D-09)
