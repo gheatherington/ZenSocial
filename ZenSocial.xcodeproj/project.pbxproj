@@ -16,6 +16,9 @@
 		A1000007 /* AuthDomains.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000007 /* AuthDomains.swift */; };
 		A1000008 /* Color+ZenSocial.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000008 /* Color+ZenSocial.swift */; };
 		A1000009 /* WebViewConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000009 /* WebViewConfiguration.swift */; };
+		A100000A /* PlatformWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000A /* PlatformWebView.swift */; };
+		A100000B /* WebViewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000B /* WebViewCoordinator.swift */; };
+		A100000C /* AuthModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000C /* AuthModalView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		A2000007 /* AuthDomains.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDomains.swift; sourceTree = "<group>"; };
 		A2000008 /* Color+ZenSocial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+ZenSocial.swift"; sourceTree = "<group>"; };
 		A2000009 /* WebViewConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewConfiguration.swift; sourceTree = "<group>"; };
+		A200000A /* PlatformWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformWebView.swift; sourceTree = "<group>"; };
+		A200000B /* WebViewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewCoordinator.swift; sourceTree = "<group>"; };
+		A200000C /* AuthModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModalView.swift; sourceTree = "<group>"; };
 		A3000001 /* ZenSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -58,6 +64,7 @@
 				A5000004 /* Services */,
 				A5000005 /* WebView */,
 				A5000006 /* Extensions */,
+				A5000008 /* Views */,
 			);
 			path = ZenSocial;
 			sourceTree = "<group>";
@@ -86,6 +93,8 @@
 			isa = PBXGroup;
 			children = (
 				A2000009 /* WebViewConfiguration.swift */,
+				A200000A /* PlatformWebView.swift */,
+				A200000B /* WebViewCoordinator.swift */,
 			);
 			path = WebView;
 			sourceTree = "<group>";
@@ -96,6 +105,14 @@
 				A2000008 /* Color+ZenSocial.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		A5000008 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A200000C /* AuthModalView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A5000007 /* Products */ = {
@@ -183,6 +200,9 @@
 				A1000007 /* AuthDomains.swift in Sources */,
 				A1000008 /* Color+ZenSocial.swift in Sources */,
 				A1000009 /* WebViewConfiguration.swift in Sources */,
+				A100000A /* PlatformWebView.swift in Sources */,
+				A100000B /* WebViewCoordinator.swift in Sources */,
+				A100000C /* AuthModalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
