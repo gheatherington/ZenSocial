@@ -64,6 +64,10 @@ Recent decisions affecting current work:
 - [Phase 01]: Used async decidePolicyFor variant for Swift 6 strict concurrency
 - [Phase 01]: Auth modal shares platform WKWebsiteDataStore so login cookies persist correctly
 
+### Roadmap Evolution
+
+- Phase 01.1 inserted after Phase 1: Native Shell Polish (INSERTED) — floating navigation button, home screen, custom loading screens, auth modal as half-sheet, background blending groundwork
+
 ### Pending Todos
 
 None yet.

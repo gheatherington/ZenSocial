@@ -38,6 +38,16 @@ Plans:
 
 **UI hint**: yes
 
+### Phase 01.1: Native Shell Polish (INSERTED)
+
+**Goal:** [Urgent work - to be planned]
+**Requirements**: TBD
+**Depends on:** Phase 1
+**Plans:** 0 plans
+
+Plans:
+- [ ] TBD (run /gsd:plan-phase 01.1 to break down)
+
 ### Phase 2: Injection Engine + Dark Theme
 **Goal**: ZenSocial's dark, minimal theme is visibly applied to both Instagram and YouTube, proving the injection pipeline works end-to-end
 **Depends on**: Phase 1
