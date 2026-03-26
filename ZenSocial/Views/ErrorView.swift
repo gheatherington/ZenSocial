@@ -57,7 +57,7 @@ struct ErrorView: View {
                         .padding(.vertical, 12)
                 }
                 .background(Color.zenAccent)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
                 .accessibilityLabel("Try again")
                 .accessibilityHint("Reloads \(platform.displayName)")
             }

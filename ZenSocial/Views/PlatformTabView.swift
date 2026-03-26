@@ -11,15 +11,10 @@ struct PlatformTabView: View {
             // Hidden behind error screen when in error state
             PlatformWebView(platform: platform, state: state)
 
-            // Loading overlay (SHELL-02, per UI-SPEC Loading Indicator)
+            // Loading overlay (D-13, D-14: context-aware loading screens)
             if state.loadingState == .loading {
-                Color.black.opacity(0.3)
-                    .ignoresSafeArea()
+                LoadingScreenView(variant: platform == .instagram ? .instagram : .youtube)
                     .transition(.opacity)
-                ProgressView()
-                    .tint(Color.zenAccent)
-                    .scaleEffect(1.2)
-                    .accessibilityLabel("Loading \(platform.displayName)")
             }
 
             // Error screen (SHELL-03, per UI-SPEC Error/Offline Screen)

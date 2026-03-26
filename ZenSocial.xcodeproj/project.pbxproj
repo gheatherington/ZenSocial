@@ -22,6 +22,11 @@
 		A100000D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000D /* ContentView.swift */; };
 		A100000E /* PlatformTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000E /* PlatformTabView.swift */; };
 		A100000F /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200000F /* ErrorView.swift */; };
+		A1000010 /* NavigationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000010 /* NavigationState.swift */; };
+		A1000011 /* LoadingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000011 /* LoadingScreenView.swift */; };
+		A1000012 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000012 /* HomeScreenView.swift */; };
+		A1000013 /* SettingsPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000013 /* SettingsPlaceholderView.swift */; };
+		A1000014 /* FloatingPillButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000014 /* FloatingPillButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +45,11 @@
 		A200000D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A200000E /* PlatformTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformTabView.swift; sourceTree = "<group>"; };
 		A200000F /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		A2000010 /* NavigationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationState.swift; sourceTree = "<group>"; };
+		A2000011 /* LoadingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenView.swift; sourceTree = "<group>"; };
+		A2000012 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
+		A2000013 /* SettingsPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPlaceholderView.swift; sourceTree = "<group>"; };
+		A2000014 /* FloatingPillButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPillButton.swift; sourceTree = "<group>"; };
 		A3000001 /* ZenSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -80,6 +90,7 @@
 			children = (
 				A2000002 /* Platform.swift */,
 				A2000003 /* WebViewState.swift */,
+				A2000010 /* NavigationState.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -120,6 +131,10 @@
 				A200000D /* ContentView.swift */,
 				A200000E /* PlatformTabView.swift */,
 				A200000F /* ErrorView.swift */,
+				A2000011 /* LoadingScreenView.swift */,
+				A2000012 /* HomeScreenView.swift */,
+				A2000013 /* SettingsPlaceholderView.swift */,
+				A2000014 /* FloatingPillButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +230,11 @@
 				A100000D /* ContentView.swift in Sources */,
 				A100000E /* PlatformTabView.swift in Sources */,
 				A100000F /* ErrorView.swift in Sources */,
+				A1000010 /* NavigationState.swift in Sources */,
+				A1000011 /* LoadingScreenView.swift in Sources */,
+				A1000012 /* HomeScreenView.swift in Sources */,
+				A1000013 /* SettingsPlaceholderView.swift in Sources */,
+				A1000014 /* FloatingPillButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

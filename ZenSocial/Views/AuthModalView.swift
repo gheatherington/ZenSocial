@@ -30,7 +30,8 @@ struct AuthModalView: View {
                 }
             }
         }
-        .presentationDetents([.large])
+        .presentationDetents([.medium])
+        .presentationDragIndicator(.visible)
     }
 }
 
