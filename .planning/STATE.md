@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Executing Phase 01.1
-stopped_at: Completed 01.1-01-PLAN.md
-last_updated: "2026-03-26T16:18:18.564Z"
+status: Ready to execute
+stopped_at: Completed 01.1-02-PLAN.md
+last_updated: "2026-03-26T16:29:55.112Z"
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 5
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # Project State
@@ -24,7 +24,7 @@ See: .planning/PROJECT.md (updated 2026-03-24)
 ## Current Position
 
 Phase: 01.1 (native-shell-polish) — EXECUTING
-Plan: 1 of 2
+Plan: 2 of 2
 
 ## Performance Metrics
 
@@ -49,6 +49,7 @@ Plan: 1 of 2
 | Phase 01 P01 | 4min | 1 tasks | 11 files |
 | Phase 01 P02 | 3min | 2 tasks | 3 files |
 | Phase 01.1 P01 | 3min | 2 tasks | 6 files |
+| Phase 01.1 P02 | 6min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,8 @@ Recent decisions affecting current work:
 - [Phase 01]: Used async decidePolicyFor variant for Swift 6 strict concurrency
 - [Phase 01]: Auth modal shares platform WKWebsiteDataStore so login cookies persist correctly
 - [Phase 01.1]: LoadingVariant as standalone enum for reuse; launcher cards as private structs in HomeScreenView
+- [Phase 01.1]: ZStack-always-rendered architecture: both PlatformTabView instances always in hierarchy, toggled via opacity+allowsHitTesting
+- [Phase 01.1]: Explicit withAnimation blocks over implicit .animation() modifiers to prevent animation conflicts
 
 ### Roadmap Evolution
 
@@ -80,6 +83,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-26T16:18:18.561Z
-Stopped at: Completed 01.1-01-PLAN.md
+Last session: 2026-03-26T16:29:55.109Z
+Stopped at: Completed 01.1-02-PLAN.md
 Resume file: None
