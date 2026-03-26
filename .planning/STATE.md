@@ -3,13 +3,13 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Ready to plan
-stopped_at: Phase 01.1 context gathered
-last_updated: "2026-03-26T11:52:18.262Z"
+stopped_at: Completed 01.1-01-PLAN.md
+last_updated: "2026-03-26T16:18:18.564Z"
 progress:
   total_phases: 5
   completed_phases: 1
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 5
+  completed_plans: 4
 ---
 
 # Project State
@@ -48,6 +48,7 @@ Plan: Not started
 *Updated after each plan completion*
 | Phase 01 P01 | 4min | 1 tasks | 11 files |
 | Phase 01 P02 | 3min | 2 tasks | 3 files |
+| Phase 01.1 P01 | 3min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -63,6 +64,7 @@ Recent decisions affecting current work:
 - [Phase 01]: Added @MainActor to DataStoreManager for Swift 6 strict concurrency with WKWebsiteDataStore
 - [Phase 01]: Used async decidePolicyFor variant for Swift 6 strict concurrency
 - [Phase 01]: Auth modal shares platform WKWebsiteDataStore so login cookies persist correctly
+- [Phase 01.1]: LoadingVariant as standalone enum for reuse; launcher cards as private structs in HomeScreenView
 
 ### Roadmap Evolution
 
@@ -78,6 +80,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-26T11:52:18.254Z
-Stopped at: Phase 01.1 context gathered
-Resume file: .planning/phases/01.1-native-shell-polish/01.1-CONTEXT.md
+Last session: 2026-03-26T16:18:18.561Z
+Stopped at: Completed 01.1-01-PLAN.md
+Resume file: None
