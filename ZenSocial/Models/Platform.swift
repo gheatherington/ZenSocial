@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 enum Platform: String, CaseIterable, Identifiable {
     case instagram
@@ -24,6 +25,20 @@ enum Platform: String, CaseIterable, Identifiable {
         switch self {
         case .instagram: return "camera"
         case .youtube: return "play.rectangle"
+        }
+    }
+
+    var identityColor: Color {
+        switch self {
+        case .instagram: return .zenInstagramPink
+        case .youtube: return .zenYouTubeRed
+        }
+    }
+
+    var filledIconName: String {
+        switch self {
+        case .instagram: return "camera.fill"
+        case .youtube: return "play.rectangle.fill"
         }
     }
 
