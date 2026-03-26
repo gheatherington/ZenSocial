@@ -12,7 +12,8 @@ A native-feeling iOS shell that loads Instagram and YouTube while blocking their
 
 ### Validated
 
-(None yet — ship to validate)
+- [x] iOS app with WKWebView container hosting Instagram and YouTube — *Validated in Phase 01: native-shell-wkwebview-foundation*
+- [x] Native-feeling navigation and tab bar between supported apps — *Validated in Phase 01: native-shell-wkwebview-foundation*
 
 ### Active
 
@@ -75,4 +76,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-03-24 after initialization*
+*Last updated: 2026-03-25 after Phase 01 completion — native iOS shell with WKWebView rendering Instagram and YouTube is functional*
