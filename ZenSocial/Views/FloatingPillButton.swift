@@ -34,6 +34,7 @@ struct FloatingPillButton: View {
                     collapsedPill
                 }
             }
+            .simultaneousGesture(dragGesture)
             .position(CGPoint(
                 x: nav.pillPosition.x + dragTranslation.width,
                 y: nav.pillPosition.y + dragTranslation.height
@@ -80,7 +81,6 @@ struct FloatingPillButton: View {
             }
         }
         .shadow(color: .black.opacity(0.4), radius: 12, x: 0, y: 4)
-        .gesture(dragGesture)
         .accessibilityLabel("Navigation")
         .accessibilityHint("Double-tap to expand navigation options")
     }
