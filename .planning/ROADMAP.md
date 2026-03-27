@@ -48,6 +48,17 @@ Plans:
 Plans:
 - [x] TBD (run /gsd:plan-phase 01.1 to break down) (completed 2026-03-26)
 
+### Phase 01.2: Fixes for features implement over phase 1 and 1.1 (INSERTED)
+
+**Goal:** Fix five interaction bugs from Phase 1/1.1: video audio persisting on platform switch, pill button visibility on wrong screens, pill drag teleport, expanded pill off-screen overflow, and platform content not edge-to-edge
+**Requirements**: Captured in 01.2-CONTEXT.md (D-01 through D-09)
+**Depends on:** Phase 01.1
+**Plans:** 2 plans
+
+Plans:
+- [ ] 01.2-01-PLAN.md — Video pause on switch, pill visibility gating, edge-to-edge layout
+- [ ] 01.2-02-PLAN.md — Pill drag spring animation and direction-aware expansion
+
 ### Phase 2: Injection Engine + Dark Theme
 **Goal**: ZenSocial's dark, minimal theme is visibly applied to both Instagram and YouTube, proving the injection pipeline works end-to-end
 **Depends on**: Phase 1
