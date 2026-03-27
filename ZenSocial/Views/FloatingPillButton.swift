@@ -30,9 +30,7 @@ struct FloatingPillButton: View {
             Group {
                 if nav.isPillExpanded {
                     expandedPill
-                        .offset(x: expandsLeft
-                            ? -(expandedPillWidth / 2 - pillSize / 2)
-                            : (expandedPillWidth / 2 - pillSize / 2))
+                        .offset(x: expandedPillOffset)
                 } else {
                     collapsedPill
                 }
@@ -41,9 +39,21 @@ struct FloatingPillButton: View {
         }
     }
 
-    /// Whether the expanded pill should expand leftward (pill is on right side of screen)
-    private var expandsLeft: Bool {
-        nav.pillPosition.x > UIScreen.main.bounds.width / 2
+    /// Offset to apply when expanded pill would clip past screen edges.
+    /// Returns 0 when centered expansion fits; shifts left/right near edges.
+    private var expandedPillOffset: CGFloat {
+        let screenWidth = UIScreen.main.bounds.width
+        let halfExpanded = expandedPillWidth / 2  // 86
+        let leftEdge = nav.pillPosition.x - halfExpanded
+        let rightEdge = nav.pillPosition.x + halfExpanded
+
+        if leftEdge < edgeMargin {
+            return edgeMargin - leftEdge  // positive, shift right
+        } else if rightEdge > screenWidth - edgeMargin {
+            return (screenWidth - edgeMargin) - rightEdge  // negative, shift left
+        } else {
+            return 0  // centered, no offset needed
+        }
     }
 
     // MARK: - Collapsed State
