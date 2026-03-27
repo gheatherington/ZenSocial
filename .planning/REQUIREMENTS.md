@@ -21,10 +21,10 @@
 
 ### Injection Engine
 
-- [ ] **INJ-01**: CSS/JS injection system executes platform-specific scripts at page load for Instagram and YouTube
-- [ ] **INJ-02**: ZenSocial's dark/minimal theme is applied to Instagram via CSS injection
-- [ ] **INJ-03**: ZenSocial's dark/minimal theme is applied to YouTube via CSS injection
-- [ ] **INJ-04**: Injection scripts are stored as externalized bundle files (not hardcoded strings) for maintainability and easy updates
+- [x] **INJ-01**: CSS/JS injection system executes platform-specific scripts at page load for Instagram and YouTube
+- [x] **INJ-02**: ZenSocial's dark/minimal theme is applied to Instagram via CSS injection
+- [x] **INJ-03**: ZenSocial's dark/minimal theme is applied to YouTube via CSS injection
+- [x] **INJ-04**: Injection scripts are stored as externalized bundle files (not hardcoded strings) for maintainability and easy updates
 
 ### Feature Blocking
 
@@ -89,10 +89,10 @@
 | WEB-04 | Phase 1 | Complete |
 | WEB-05 | Phase 1 | Complete |
 | BLOCK-03 | Phase 1 | Complete |
-| INJ-01 | Phase 2 | Pending |
-| INJ-02 | Phase 2 | Pending |
-| INJ-03 | Phase 2 | Pending |
-| INJ-04 | Phase 2 | Pending |
+| INJ-01 | Phase 2 | Complete |
+| INJ-02 | Phase 2 | Complete |
+| INJ-03 | Phase 2 | Complete |
+| INJ-04 | Phase 2 | Complete |
 | BLOCK-01 | Phase 3 | Pending |
 | BLOCK-02 | Phase 3 | Pending |
 | SET-01 | Phase 4 | Pending |

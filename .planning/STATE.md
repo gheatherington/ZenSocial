@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Phase complete — ready for verification
-stopped_at: Phase 2 UI-SPEC approved
-last_updated: "2026-03-27T17:51:22.841Z"
-last_activity: "2026-03-27 - Completed quick task 260327-ioe: Insert Phase 3 push notifications, renumber phases, create context"
+status: Executing Phase 02
+stopped_at: Completed 02-01-PLAN.md
+last_updated: "2026-03-27T22:37:33Z"
+last_activity: 2026-03-27
 progress:
   total_phases: 7
   completed_phases: 3
-  total_plans: 7
+  total_plans: 9
   completed_plans: 7
 ---
 
@@ -20,11 +20,11 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-24)
 
 **Core value:** A native-feeling iOS shell that loads Instagram and YouTube while blocking their short-form video features -- making social media intentional, not addictive.
-**Current focus:** Phase 01.1 — native-shell-polish
+**Current focus:** Phase 02 — injection-engine-dark-theme
 
 ## Current Position
 
-Phase: 01.1 (native-shell-polish) — EXECUTING
+Phase: 02 (injection-engine-dark-theme) — EXECUTING
 Plan: 2 of 2
 
 ## Performance Metrics
@@ -53,6 +53,7 @@ Plan: 2 of 2
 | Phase 01.1 P02 | 6min | 2 tasks | 6 files |
 | Phase 01.2 P01 | 3min | 2 tasks | 3 files |
 | Phase 01.2 P02 | 3min | 2 tasks | 1 files |
+| Phase 02 P01 | 4min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -74,6 +75,8 @@ Recent decisions affecting current work:
 - [Phase 01.2]: Used .onChange(of: nav.activeScreen) for reliable video pause on platform switch
 - [Phase 01.2]: Matched existing spring parameters (0.35/0.8) for drag release animation consistency
 - [Phase 01.2]: Used 172pt expandedPillWidth for direction-aware expansion offset calculation
+- [Phase 02-01]: Scripts/ added as folder reference in Xcode (not individual file references) to preserve subdirectory structure in bundle for Bundle.main.url(subdirectory:) lookup
+- [Phase 02-01]: JS IIFE appends style to document.documentElement (not document.head) because head is null at atDocumentStart
 
 ### Roadmap Evolution
 
@@ -98,7 +101,7 @@ None yet.
 
 ## Session Continuity
 
-Last activity: 2026-03-27 - Completed quick task 260327-ioe: Insert Phase 3 push notifications, renumber phases, create context
-Last session: 2026-03-27T17:51:22.833Z
-Stopped at: Phase 2 UI-SPEC approved
-Resume file: .planning/phases/02-injection-engine-dark-theme/02-UI-SPEC.md
+Last activity: 2026-03-27
+Last session: 2026-03-27T22:37:33Z
+Stopped at: Completed 02-01-PLAN.md
+Resume file: .planning/phases/02-injection-engine-dark-theme/02-02-PLAN.md
