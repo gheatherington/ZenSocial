@@ -1,0 +1,98 @@
+/* ZenSocial Instagram Dark Theme -- injected at atDocumentStart via ScriptLoader */
+
+/* ============================================================
+   Pass 1: CSS Variable Overrides
+   Target both light and dark mode classes to force dark theme
+   regardless of system setting (D-04).
+   ============================================================ */
+
+:root,
+.__ig-light-mode,
+.__ig-dark-mode {
+    --ig-primary-background: #000000 !important;
+    --ig-secondary-background: #1C1C1E !important;
+    --ig-elevated-background: #1C1C1E !important;
+    --ig-separator: #2C2C2E !important;
+    --ig-stroke: #2C2C2E !important;
+    --ig-primary-text: #FFFFFF !important;
+    --ig-secondary-text: #8E8E93 !important;
+    --ig-link: #4DA6FF !important;
+    --ig-badge: #4DA6FF !important;
+    --ig-primary-button: #4DA6FF !important;
+}
+
+/* FDS (Facebook Design System) variable overrides */
+:root {
+    --fds-black: #000000 !important;
+    --web-always-dark-overlay: rgba(0,0,0,0.8) !important;
+}
+
+/* ============================================================
+   Pass 2: Direct Property Overrides
+   For elements that ignore CSS variables.
+   D-02: img, video, canvas, svg are intentionally excluded.
+   D-04: No @media (prefers-color-scheme) -- overrides are unconditional.
+   ============================================================ */
+
+/* Base document */
+body,
+html {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* Structural chrome: nav bars, headers, banners */
+nav,
+header,
+[role="banner"],
+[role="navigation"] {
+    background-color: #1C1C1E !important;
+}
+
+/* Input fields and search bars */
+input,
+textarea,
+[contenteditable="true"],
+[role="searchbox"],
+[role="textbox"] {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+    border-color: #2C2C2E !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: #8E8E93 !important;
+}
+
+/* Links -- accent color for interactive elements (D-01) */
+a {
+    color: #4DA6FF !important;
+}
+
+/* Scrollbar theming */
+::-webkit-scrollbar {
+    background-color: #000000;
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #2C2C2E;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #8E8E93;
+}
+
+/* ============================================================
+   Exclusions
+   D-02: Do NOT style user-generated media.
+   UI-SPEC rule 5: Do NOT override Instagram story ring gradient.
+   Platform brand colors (gradients) are preserved by not targeting them.
+   ============================================================ */

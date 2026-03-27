@@ -1,0 +1,83 @@
+/* ZenSocial YouTube Dark Theme -- injected at atDocumentStart via ScriptLoader */
+
+/* ============================================================
+   Pass 1: CSS Variable Overrides
+   Target both html[dark] and html:not([dark]) to force dark theme
+   regardless of system setting (D-04).
+   ============================================================ */
+
+:root,
+html[dark],
+html:not([dark]) {
+    --yt-spec-base-background: #000000 !important;
+    --yt-spec-raised-background: #1C1C1E !important;
+    --yt-spec-general-background-a: #1C1C1E !important;
+    --yt-spec-general-background-b: #1C1C1E !important;
+    --yt-spec-general-background-c: #000000 !important;
+    --yt-spec-menu-background: #1C1C1E !important;
+    --yt-spec-text-primary: #FFFFFF !important;
+    --yt-spec-text-secondary: #8E8E93 !important;
+    --yt-spec-text-disabled: #8E8E93 !important;
+    --yt-spec-call-to-action: #4DA6FF !important;
+    --yt-spec-icon-active-other: #4DA6FF !important;
+    --yt-spec-10-percent-layer: #2C2C2E !important;
+    /* UI-SPEC rule 5: Preserve YouTube brand red on subscribe buttons */
+    --yt-spec-brand-icon-active: #FF0000 !important;
+}
+
+/* ============================================================
+   Pass 2: Direct Property Overrides
+   For elements that ignore CSS variables.
+   D-02: img, video, canvas, svg are intentionally excluded.
+   D-04: No @media (prefers-color-scheme) -- overrides are unconditional.
+   ============================================================ */
+
+/* Base document and app shell */
+body,
+html,
+ytm-app {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* Mobile bottom navigation bar */
+ytm-pivot-bar-renderer {
+    background-color: #1C1C1E !important;
+}
+
+/* Search bar */
+ytm-searchbox {
+    background-color: #1C1C1E !important;
+}
+
+/* Links -- accent color for interactive elements (D-01) */
+a {
+    color: #4DA6FF !important;
+}
+
+/* Scrollbar theming */
+::-webkit-scrollbar {
+    background-color: #000000;
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #2C2C2E;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #8E8E93;
+}
+
+/* ============================================================
+   Exclusions
+   D-02: Do NOT style user-generated media (img, video, canvas, svg).
+   UI-SPEC rule 5: YouTube brand red (#FF0000) preserved via
+   --yt-spec-brand-icon-active above. Not overridden here.
+   ============================================================ */

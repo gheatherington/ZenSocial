@@ -27,6 +27,8 @@
 		A1000012 /* HomeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000012 /* HomeScreenView.swift */; };
 		A1000013 /* SettingsPlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000013 /* SettingsPlaceholderView.swift */; };
 		A1000014 /* FloatingPillButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000014 /* FloatingPillButton.swift */; };
+		A1000015 /* ScriptLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000015 /* ScriptLoader.swift */; };
+		A1000016 /* Scripts in Resources */ = {isa = PBXBuildFile; fileRef = A2000016 /* Scripts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		A2000012 /* HomeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenView.swift; sourceTree = "<group>"; };
 		A2000013 /* SettingsPlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsPlaceholderView.swift; sourceTree = "<group>"; };
 		A2000014 /* FloatingPillButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingPillButton.swift; sourceTree = "<group>"; };
+		A2000015 /* ScriptLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptLoader.swift; sourceTree = "<group>"; };
+		A2000016 /* Scripts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Scripts; sourceTree = "<group>"; };
 		A3000001 /* ZenSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -81,6 +85,7 @@
 				A5000005 /* WebView */,
 				A5000006 /* Extensions */,
 				A5000008 /* Views */,
+				A2000016 /* Scripts */,
 			);
 			path = ZenSocial;
 			sourceTree = "<group>";
@@ -102,6 +107,7 @@
 				A2000005 /* NetworkMonitor.swift */,
 				A2000006 /* DataStoreManager.swift */,
 				A2000007 /* AuthDomains.swift */,
+				A2000015 /* ScriptLoader.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -205,6 +211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1000016 /* Scripts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +242,7 @@
 				A1000012 /* HomeScreenView.swift in Sources */,
 				A1000013 /* SettingsPlaceholderView.swift in Sources */,
 				A1000014 /* FloatingPillButton.swift in Sources */,
+				A1000015 /* ScriptLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
