@@ -34,11 +34,11 @@ struct FloatingPillButton: View {
                     collapsedPill
                 }
             }
-            .simultaneousGesture(dragGesture)
             .position(CGPoint(
                 x: nav.pillPosition.x + dragTranslation.width,
                 y: nav.pillPosition.y + dragTranslation.height
             ))
+            .animation(nil, value: dragTranslation)
         }
     }
 
@@ -62,25 +62,25 @@ struct FloatingPillButton: View {
     // MARK: - Collapsed State
 
     private var collapsedPill: some View {
-        Button {
-            UIImpactFeedbackGenerator(style: .light).impactOccurred()
-            togglePill(expanded: true)
-        } label: {
-            ZStack {
-                Circle()
-                    .fill(.ultraThinMaterial)
-                    .frame(width: pillSize, height: pillSize)
+        ZStack {
+            Circle()
+                .fill(.ultraThinMaterial)
+                .frame(width: pillSize, height: pillSize)
 
-                Circle()
-                    .fill(Color.zenSecondaryBackground.opacity(0.9))
-                    .frame(width: pillSize, height: pillSize)
+            Circle()
+                .fill(Color.zenSecondaryBackground.opacity(0.9))
+                .frame(width: pillSize, height: pillSize)
 
-                Image(systemName: "house.fill")
-                    .font(.system(size: iconSize))
-                    .foregroundStyle(Color.zenAccent)
-            }
+            Image(systemName: "house.fill")
+                .font(.system(size: iconSize))
+                .foregroundStyle(Color.zenAccent)
         }
         .shadow(color: .black.opacity(0.4), radius: 12, x: 0, y: 4)
+        .onTapGesture {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            togglePill(expanded: true)
+        }
+        .gesture(dragGesture)
         .accessibilityLabel("Navigation")
         .accessibilityHint("Double-tap to expand navigation options")
     }
