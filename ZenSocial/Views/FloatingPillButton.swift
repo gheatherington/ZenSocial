@@ -2,8 +2,7 @@ import SwiftUI
 
 struct FloatingPillButton: View {
     @Bindable var nav: NavigationState
-    @State private var isDragging: Bool = false
-    @State private var dragStartPosition: CGPoint = .zero
+    @GestureState private var dragTranslation: CGSize = .zero
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let pillSize: CGFloat = 56
@@ -35,7 +34,10 @@ struct FloatingPillButton: View {
                     collapsedPill
                 }
             }
-            .position(nav.pillPosition)
+            .position(CGPoint(
+                x: nav.pillPosition.x + dragTranslation.width,
+                y: nav.pillPosition.y + dragTranslation.height
+            ))
         }
     }
 
@@ -125,20 +127,17 @@ struct FloatingPillButton: View {
 
     private var dragGesture: some Gesture {
         DragGesture()
-            .onChanged { value in
-                if !isDragging {
-                    dragStartPosition = nav.pillPosition
-                    isDragging = true
-                }
-                nav.pillPosition = CGPoint(
-                    x: dragStartPosition.x + value.translation.width,
-                    y: dragStartPosition.y + value.translation.height
-                )
+            .updating($dragTranslation) { value, state, _ in
+                state = value.translation
             }
-            .onEnded { _ in
-                isDragging = false
-                let clamped = clampedPosition(nav.pillPosition)
-
+            .onEnded { value in
+                let final = CGPoint(
+                    x: nav.pillPosition.x + value.translation.width,
+                    y: nav.pillPosition.y + value.translation.height
+                )
+                let clamped = clampedPosition(final)
+                // Set unclamped first (matches visual at gesture end as @GestureState resets)
+                nav.pillPosition = final
                 if reduceMotion {
                     nav.pillPosition = clamped
                 } else {
