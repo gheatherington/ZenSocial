@@ -2,7 +2,7 @@ import SwiftUI
 
 struct FloatingPillButton: View {
     @Bindable var nav: NavigationState
-    @GestureState private var dragTranslation: CGSize = .zero
+    @State private var dragOffset: CGSize = .zero
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let pillSize: CGFloat = 56
@@ -34,10 +34,8 @@ struct FloatingPillButton: View {
                     collapsedPill
                 }
             }
-            .position(CGPoint(
-                x: nav.pillPosition.x + dragTranslation.width,
-                y: nav.pillPosition.y + dragTranslation.height
-            ))
+            .position(nav.pillPosition)
+            .offset(dragOffset)
         }
     }
 
@@ -127,17 +125,18 @@ struct FloatingPillButton: View {
 
     private var dragGesture: some Gesture {
         DragGesture()
-            .updating($dragTranslation) { value, state, _ in
-                state = value.translation
+            .onChanged { value in
+                dragOffset = value.translation
             }
             .onEnded { value in
-                let final = CGPoint(
+                let newPosition = CGPoint(
                     x: nav.pillPosition.x + value.translation.width,
                     y: nav.pillPosition.y + value.translation.height
                 )
-                let clamped = clampedPosition(final)
-                // Set unclamped first (matches visual at gesture end as @GestureState resets)
-                nav.pillPosition = final
+                let clamped = clampedPosition(newPosition)
+                // Clear dragOffset FIRST — this matches what Phase 01.1 did and keeps
+                // SwiftUI's state consistent before animating nav.pillPosition.
+                dragOffset = .zero
                 if reduceMotion {
                     nav.pillPosition = clamped
                 } else {
