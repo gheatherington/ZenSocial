@@ -60,7 +60,7 @@ Plan: 2 of 2
 Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
-- [Roadmap]: 4-phase build order following research recommendation -- shell first, injection second, blocking third, settings fourth
+- [Roadmap]: 5-phase build order -- shell first, injection second, push notifications third, blocking fourth, settings fifth (Phase 3 inserted 2026-03-27)
 - [Roadmap]: BLOCK-03 (user-agent spoofing) placed in Phase 1 because Instagram requires it to function at all
 - [Roadmap]: WKWebView config is immutable after init -- all architectural decisions must land in Phase 1
 - [Phase 01]: Removed deprecated WKProcessPool -- iOS 17+ shares process pool by default (D-03 satisfied)
@@ -93,10 +93,11 @@ None yet.
 | 260327-0lt | Fix FloatingPillButton drag tracking and centered expansion logic | 2026-03-27 | e8c1703 | [260327-0lt-fix-floatingpillbutton-drag-tracking-and](./quick/260327-0lt-fix-floatingpillbutton-drag-tracking-and/) |
 | 260327-19t | Fix floating pill drag -- pill follows finger in real-time, no jump on release | 2026-03-27 | 568c787 | [260327-19t-fix-floating-pill-drag-pill-doesn-t-foll](./quick/260327-19t-fix-floating-pill-drag-pill-doesn-t-foll/) |
 | 260327-d97 | Fix floating pill tap-to-expand regression after drag tracking change | 2026-03-27 | 86ca29c | [260327-d97-fix-floating-pill-tap-to-expand-regressi](./quick/260327-d97-fix-floating-pill-tap-to-expand-regressi/) |
+| 260327-ioe | Insert Phase 3 push notifications, renumber phases, create context | 2026-03-27 | df9fcf6 | [260327-ioe-insert-phase-3-push-notifications-renumb](./quick/260327-ioe-insert-phase-3-push-notifications-renumb/) |
 
 ## Session Continuity
 
-Last activity: 2026-03-27 - Completed quick task 260327-d97: Fix floating pill tap-to-expand regression after drag tracking change
-Last session: 2026-03-27T13:39:08Z
-Stopped at: Completed quick-260327-d97
+Last activity: 2026-03-27 - Completed quick task 260327-ioe: Insert Phase 3 push notifications, renumber phases, create context
+Last session: 2026-03-27T14:00:00Z
+Stopped at: Completed quick-260327-ioe
 Resume file: None
