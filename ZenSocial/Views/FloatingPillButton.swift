@@ -2,7 +2,8 @@ import SwiftUI
 
 struct FloatingPillButton: View {
     @Bindable var nav: NavigationState
-    @State private var dragOffset: CGSize = .zero
+    @State private var isDragging: Bool = false
+    @State private var dragStartPosition: CGPoint = .zero
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let pillSize: CGFloat = 56
@@ -37,7 +38,6 @@ struct FloatingPillButton: View {
                 }
             }
             .position(nav.pillPosition)
-            .offset(dragOffset)
         }
     }
 
@@ -116,22 +116,19 @@ struct FloatingPillButton: View {
     private var dragGesture: some Gesture {
         DragGesture()
             .onChanged { value in
-                dragOffset = value.translation
-            }
-            .onEnded { value in
-                let newPosition = CGPoint(
-                    x: nav.pillPosition.x + value.translation.width,
-                    y: nav.pillPosition.y + value.translation.height
+                if !isDragging {
+                    dragStartPosition = nav.pillPosition
+                    isDragging = true
+                }
+                nav.pillPosition = CGPoint(
+                    x: dragStartPosition.x + value.translation.width,
+                    y: dragStartPosition.y + value.translation.height
                 )
-                let clamped = clampedPosition(newPosition)
+            }
+            .onEnded { _ in
+                isDragging = false
+                let clamped = clampedPosition(nav.pillPosition)
 
-                // Move pillPosition to current visual location (unclamped) and clear
-                // dragOffset in the same frame — no visual jump since
-                // (pillPosition + dragOffset) == (newPosition + .zero)
-                nav.pillPosition = newPosition
-                dragOffset = .zero
-
-                // Spring animate to clamped position
                 if reduceMotion {
                     nav.pillPosition = clamped
                 } else {
