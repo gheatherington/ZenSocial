@@ -86,6 +86,12 @@ None yet.
 
 None yet.
 
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Directory |
+|---|-------------|------|--------|-----------|
+| 260327-0lt | Fix FloatingPillButton drag tracking and centered expansion logic | 2026-03-27 | e8c1703 | [260327-0lt-fix-floatingpillbutton-drag-tracking-and](./quick/260327-0lt-fix-floatingpillbutton-drag-tracking-and/) |
+
 ## Session Continuity
 
 Last session: 2026-03-27T03:43:33.959Z
