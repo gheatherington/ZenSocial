@@ -38,7 +38,6 @@ struct FloatingPillButton: View {
                 x: nav.pillPosition.x + dragTranslation.width,
                 y: nav.pillPosition.y + dragTranslation.height
             ))
-            .animation(nil, value: dragTranslation)
         }
     }
 
@@ -127,8 +126,9 @@ struct FloatingPillButton: View {
 
     private var dragGesture: some Gesture {
         DragGesture()
-            .updating($dragTranslation) { value, state, _ in
+            .updating($dragTranslation) { value, state, transaction in
                 state = value.translation
+                transaction.disablesAnimations = true
             }
             .onEnded { value in
                 let final = CGPoint(
