@@ -10,6 +10,7 @@ struct FloatingPillButton: View {
     private let expandedIconSize: CGFloat = 20
     private let tapTargetSize: CGFloat = 44
     private let edgeMargin: CGFloat = 8
+    private let expandedPillWidth: CGFloat = 172  // 3 * 44 + 2 * 8 + 2 * 12
 
     var body: some View {
         ZStack {
@@ -28,6 +29,9 @@ struct FloatingPillButton: View {
             Group {
                 if nav.isPillExpanded {
                     expandedPill
+                        .offset(x: expandsLeft
+                            ? -(expandedPillWidth / 2 - pillSize / 2)
+                            : (expandedPillWidth / 2 - pillSize / 2))
                 } else {
                     collapsedPill
                 }
@@ -35,6 +39,11 @@ struct FloatingPillButton: View {
             .position(nav.pillPosition)
             .offset(dragOffset)
         }
+    }
+
+    /// Whether the expanded pill should expand leftward (pill is on right side of screen)
+    private var expandsLeft: Bool {
+        nav.pillPosition.x > UIScreen.main.bounds.width / 2
     }
 
     // MARK: - Collapsed State
