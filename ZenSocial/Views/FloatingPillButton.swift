@@ -114,8 +114,22 @@ struct FloatingPillButton: View {
                     x: nav.pillPosition.x + value.translation.width,
                     y: nav.pillPosition.y + value.translation.height
                 )
+                let clamped = clampedPosition(newPosition)
+
+                // Move pillPosition to current visual location (unclamped) and clear
+                // dragOffset in the same frame — no visual jump since
+                // (pillPosition + dragOffset) == (newPosition + .zero)
+                nav.pillPosition = newPosition
                 dragOffset = .zero
-                nav.pillPosition = clampedPosition(newPosition)
+
+                // Spring animate to clamped position
+                if reduceMotion {
+                    nav.pillPosition = clamped
+                } else {
+                    withAnimation(.spring(response: 0.35, dampingFraction: 0.8)) {
+                        nav.pillPosition = clamped
+                    }
+                }
                 nav.savePillPosition()
             }
     }
