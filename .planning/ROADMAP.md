@@ -69,7 +69,11 @@ Plans:
   2. User sees ZenSocial's dark theme applied to YouTube pages with no flash of the original light theme
   3. Theme persists correctly across SPA navigations within each platform (navigating between feed, profile, settings does not revert to default styling)
   4. Injection scripts are loaded from external bundle files (not hardcoded Swift strings), verifiable by inspecting the built app bundle
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — ScriptLoader service + Instagram/YouTube theme CSS + WebViewConfiguration integration
+- [ ] 02-02-PLAN.md — Script failure alert UI (D-10) + human visual verification of dark theme
 
 **Note on Push Notifications:** Push notification support is intentionally deferred to Phase 3. Phase 2 CSS/JS injection MUST NOT interfere with Instagram's service worker registration, PWA manifest, or the Push/Notification web APIs — this is a hard prerequisite for Phase 3 to work. Specifically, Phase 2 scripts must not block requests to service worker paths (e.g. `/sw.js`), must not strip `<link rel="manifest">` elements, and must not override or disable `navigator.serviceWorker`, `Notification`, or `PushManager`.
 
@@ -82,7 +86,11 @@ Plans:
   2. User receives Instagram push notifications while the app is suspended in the background
   3. The WKWebView correctly requests notification permission from the user (native iOS permission prompt appears)
   4. Instagram's service worker registers successfully — verifiable via Safari Web Inspector
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — ScriptLoader service + Instagram/YouTube theme CSS + WebViewConfiguration integration
+- [ ] 02-02-PLAN.md — Script failure alert UI (D-10) + human visual verification of dark theme
 
 **Implementation approaches to investigate (pick best based on research):**
   - **Option A — iOS 16.4+ Web Push in WKWebView**: Native support available (app minimum target is iOS 17). Works foreground and background. Uncertain whether force-quit delivery works without an APNs bridge. Lowest complexity if sufficient.
@@ -99,7 +107,11 @@ Plans:
   1. User does not see the Reels tab in Instagram's bottom navigation bar on any page
   2. User does not see the Shorts tab or Shorts shelf on YouTube's interface on any page
   3. Blocking remains active after navigating within each platform (SPA navigation does not restore blocked elements)
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — ScriptLoader service + Instagram/YouTube theme CSS + WebViewConfiguration integration
+- [ ] 02-02-PLAN.md — Script failure alert UI (D-10) + human visual verification of dark theme
 
 ### Phase 5: Settings UI
 **Goal**: Users can control which features are blocked through a native settings screen
@@ -109,7 +121,11 @@ Plans:
   1. User can open a native settings screen from the app (not a web page)
   2. User can toggle Instagram Reels blocking on and off, and the change takes effect on the next page load or refresh
   3. User can toggle YouTube Shorts blocking on and off, and the change takes effect on the next page load or refresh
-**Plans**: TBD
+**Plans**: 2 plans
+
+Plans:
+- [ ] 02-01-PLAN.md — ScriptLoader service + Instagram/YouTube theme CSS + WebViewConfiguration integration
+- [ ] 02-02-PLAN.md — Script failure alert UI (D-10) + human visual verification of dark theme
 **UI hint**: yes
 
 ## Progress
