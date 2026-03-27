@@ -2,7 +2,7 @@
 
 ## Overview
 
-ZenSocial delivers a calm, intentional social media experience on iOS by wrapping Instagram and YouTube in a native shell, injecting a dark theme, and blocking short-form video distractions. The build follows a strict dependency chain: a native shell that passes App Store review (Phase 1), then the injection engine proven with theme CSS (Phase 2), then feature blocking through that engine (Phase 3), and finally user-facing settings to control blocks (Phase 4). Each phase produces a working, testable app -- not partial layers.
+ZenSocial delivers a calm, intentional social media experience on iOS by wrapping Instagram and YouTube in a native shell, injecting a dark theme, and blocking short-form video distractions. The build follows a strict dependency chain: a native shell that passes App Store review (Phase 1), then the injection engine proven with theme CSS (Phase 2), then push notifications through the WKWebView context (Phase 3), then feature blocking through the injection engine (Phase 4), and finally user-facing settings to control blocks (Phase 5). Each phase produces a working, testable app -- not partial layers.
 
 ## Phases
 
@@ -13,9 +13,10 @@ ZenSocial delivers a calm, intentional social media experience on iOS by wrappin
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Native Shell + WKWebView Foundation** - Working iOS app that loads Instagram and YouTube in a native tab bar with persistent sessions and correct WebView configuration
-- [ ] **Phase 2: Injection Engine + Dark Theme** - CSS/JS injection pipeline proven end-to-end by applying ZenSocial's dark theme to both platforms
-- [ ] **Phase 3: Feature Blocking** - Instagram Reels and YouTube Shorts hidden via two-layer blocking (content rules + DOM injection)
-- [ ] **Phase 4: Settings UI** - Native settings screen where users toggle Reels and Shorts blocking per platform
+- [ ] **Phase 2: Injection Engine + Dark Theme** - CSS/JS injection pipeline proven end-to-end by applying ZenSocial's dark theme to both platforms (push notifications deferred to Phase 3)
+- [ ] **Phase 3: Push Notifications** - Instagram web push notifications working within the WKWebView context for foreground and background app states
+- [ ] **Phase 4: Feature Blocking** - Instagram Reels and YouTube Shorts hidden via two-layer blocking (content rules + DOM injection)
+- [ ] **Phase 5: Settings UI** - Native settings screen where users toggle Reels and Shorts blocking per platform
 
 ## Phase Details
 
@@ -70,9 +71,29 @@ Plans:
   4. Injection scripts are loaded from external bundle files (not hardcoded Swift strings), verifiable by inspecting the built app bundle
 **Plans**: TBD
 
-### Phase 3: Feature Blocking
+**Note on Push Notifications:** Push notification support is intentionally deferred to Phase 3. Phase 2 CSS/JS injection MUST NOT interfere with Instagram's service worker registration, PWA manifest, or the Push/Notification web APIs — this is a hard prerequisite for Phase 3 to work. Specifically, Phase 2 scripts must not block requests to service worker paths (e.g. `/sw.js`), must not strip `<link rel="manifest">` elements, and must not override or disable `navigator.serviceWorker`, `Notification`, or `PushManager`.
+
+### Phase 3: Push Notifications
+**Goal**: Users receive Instagram web push notifications within the WKWebView context while the app is running in the foreground or suspended in the background
+**Depends on**: Phase 2 (injection pipeline in place; Instagram PWA/service worker must not be broken by Phase 2 CSS injection)
+**Requirements**: PUSH-01, PUSH-02, PUSH-03
+**Success Criteria** (what must be TRUE):
+  1. User receives Instagram push notifications while the app is running in the foreground
+  2. User receives Instagram push notifications while the app is suspended in the background
+  3. The WKWebView correctly requests notification permission from the user (native iOS permission prompt appears)
+  4. Instagram's service worker registers successfully — verifiable via Safari Web Inspector
+**Plans**: TBD
+
+**Implementation approaches to investigate (pick best based on research):**
+  - **Option A — iOS 16.4+ Web Push in WKWebView**: Native support available (app minimum target is iOS 17). Works foreground and background. Uncertain whether force-quit delivery works without an APNs bridge. Lowest complexity if sufficient.
+  - **Option B — APNs bridge**: Native app receives silent APNs push, wakes WKWebView service worker, surfaces a local `UNUserNotificationCenter` notification. Requires APNs entitlements, Background Modes capability, and potentially a backend relay server. Handles force-quit case but adds significant infrastructure.
+  - **Option C — In-app only**: Accept that notifications only work while the app is in the foreground. Document limitation clearly. Choose only if Options A and B are not viable.
+
+**Key uncertainty**: Live testing is needed to determine whether iOS 16.4+ Web Push in WKWebView bridges the force-quit gap automatically, or whether the APNs bridge is required. Investigate Option A first before committing to Option B infrastructure.
+
+### Phase 4: Feature Blocking
 **Goal**: Instagram Reels and YouTube Shorts are completely hidden from the user experience, with blocking that survives SPA navigation
-**Depends on**: Phase 2
+**Depends on**: Phase 3
 **Requirements**: BLOCK-01, BLOCK-02
 **Success Criteria** (what must be TRUE):
   1. User does not see the Reels tab in Instagram's bottom navigation bar on any page
@@ -80,9 +101,9 @@ Plans:
   3. Blocking remains active after navigating within each platform (SPA navigation does not restore blocked elements)
 **Plans**: TBD
 
-### Phase 4: Settings UI
+### Phase 5: Settings UI
 **Goal**: Users can control which features are blocked through a native settings screen
-**Depends on**: Phase 3
+**Depends on**: Phase 4
 **Requirements**: SET-01, SET-02
 **Success Criteria** (what must be TRUE):
   1. User can open a native settings screen from the app (not a web page)
@@ -94,11 +115,12 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 -> 2 -> 3 -> 4
+Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Native Shell + WKWebView Foundation | 0/3 | Planning complete | - |
 | 2. Injection Engine + Dark Theme | 0/TBD | Not started | - |
-| 3. Feature Blocking | 0/TBD | Not started | - |
-| 4. Settings UI | 0/TBD | Not started | - |
+| 3. Push Notifications | 0/TBD | Not started | - |
+| 4. Feature Blocking | 0/TBD | Not started | - |
+| 5. Settings UI | 0/TBD | Not started | - |
