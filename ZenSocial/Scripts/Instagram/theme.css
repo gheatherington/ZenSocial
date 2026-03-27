@@ -41,12 +41,71 @@ html {
     color: #FFFFFF !important;
 }
 
-/* Structural chrome: nav bars, headers, banners */
-nav,
+/* ============================================================
+   Top navigation bar
+   Instagram's top nav is rendered as a <header> element or
+   a div with role="banner". Use multiple selectors with high
+   specificity and explicit background override.
+   ============================================================ */
+
 header,
 [role="banner"],
-[role="navigation"] {
+header[role="banner"],
+/* Instagram-specific top nav class patterns */
+div[class*="x1yc453h"],
+div[class*="x1lq5wgf"],
+/* Sticky positioned top bars */
+div[style*="position: sticky"][style*="top: 0"],
+div[style*="position:sticky"][style*="top:0"] {
     background-color: #1C1C1E !important;
+    border-bottom-color: #2C2C2E !important;
+}
+
+/* Deeper top nav elements that may have their own background */
+header *,
+[role="banner"] * {
+    background-color: transparent !important;
+}
+
+/* But restore background for interactive elements inside the nav */
+header a,
+header button,
+[role="banner"] a,
+[role="banner"] button {
+    background-color: transparent !important;
+}
+
+/* ============================================================
+   Bottom navigation bar
+   Instagram's bottom nav uses [role="navigation"] but may also
+   apply background: transparent via inline styles. Override with
+   !important and target specific structural patterns.
+   ============================================================ */
+
+[role="navigation"],
+nav[role="navigation"],
+/* Fixed positioned bottom bar pattern */
+div[style*="position: fixed"][style*="bottom"],
+div[style*="position:fixed"][style*="bottom"] {
+    background-color: #1C1C1E !important;
+    border-top-color: #2C2C2E !important;
+}
+
+/* Specifically target bottom nav tab bar icons/items */
+[role="navigation"] a,
+[role="navigation"] [role="link"],
+[role="navigation"] [role="button"] {
+    background-color: transparent !important;
+}
+
+/* ============================================================
+   Content area and cards
+   ============================================================ */
+
+/* Main content wrapper */
+main,
+[role="main"] {
+    background-color: #000000 !important;
 }
 
 /* Input fields and search bars */
@@ -65,12 +124,20 @@ textarea::placeholder {
     color: #8E8E93 !important;
 }
 
-/* Links -- accent color for interactive elements (D-01) */
-a {
+/* ============================================================
+   Links and buttons -- accent color for interactive elements (D-01)
+   ============================================================ */
+
+a,
+a:visited,
+a:link {
     color: #4DA6FF !important;
 }
 
-/* Scrollbar theming */
+/* ============================================================
+   Scrollbar theming
+   ============================================================ */
+
 ::-webkit-scrollbar {
     background-color: #000000;
     width: 6px;

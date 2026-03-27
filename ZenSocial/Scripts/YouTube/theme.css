@@ -21,8 +21,13 @@ html:not([dark]) {
     --yt-spec-call-to-action: #4DA6FF !important;
     --yt-spec-icon-active-other: #4DA6FF !important;
     --yt-spec-10-percent-layer: #2C2C2E !important;
+    --yt-spec-brand-link-text: #4DA6FF !important;
+    --yt-spec-themed-blue: #4DA6FF !important;
     /* UI-SPEC rule 5: Preserve YouTube brand red on subscribe buttons */
     --yt-spec-brand-icon-active: #FF0000 !important;
+    /* Additional mobile YouTube variables */
+    --yt-mweb-background: #000000 !important;
+    --yt-mweb-elevated-background: #1C1C1E !important;
 }
 
 /* ============================================================
@@ -40,22 +45,110 @@ ytm-app {
     color: #FFFFFF !important;
 }
 
-/* Mobile bottom navigation bar */
-ytm-pivot-bar-renderer {
+/* ============================================================
+   Top navigation bar (mobile YouTube: m.youtube.com)
+   ytm-mobile-topbar-renderer is the main top bar component.
+   Also target generic header and data-* variants.
+   ============================================================ */
+
+ytm-mobile-topbar-renderer,
+ytm-topbar-logo-renderer,
+#mobile-topbar-container,
+#header,
+.mobile-topbar-renderer {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* Desktop YouTube top nav (ytd-* polymer elements) -- also present in some views */
+ytd-masthead,
+#masthead-container,
+#masthead,
+ytd-topbar-logo-renderer {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* ============================================================
+   Bottom navigation bar (mobile YouTube)
+   ytm-pivot-bar-renderer is the tab bar at the bottom.
+   ============================================================ */
+
+ytm-pivot-bar-renderer,
+ytm-pivot-bar-item-renderer,
+.pivot-bar-renderer,
+#pivot-bar {
+    background-color: #1C1C1E !important;
+    border-top-color: #2C2C2E !important;
+}
+
+/* ============================================================
+   Search bar
+   ============================================================ */
+
+ytm-searchbox,
+#search-bar,
+.searchbox {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+}
+
+/* ============================================================
+   Content area surfaces
+   ============================================================ */
+
+/* Section backgrounds and card surfaces */
+ytm-section-list-renderer,
+ytm-compact-video-renderer,
+ytm-compact-link-renderer,
+ytm-media-item {
+    background-color: #000000 !important;
+}
+
+/* Sheet/modal backgrounds */
+ytm-menu-popup-renderer,
+ytm-bottom-sheet-renderer,
+.bottom-sheet-overlay {
     background-color: #1C1C1E !important;
 }
 
-/* Search bar */
-ytm-searchbox {
-    background-color: #1C1C1E !important;
-}
+/* ============================================================
+   Buttons and interactive elements -- blue accent (D-01)
+   ============================================================ */
 
-/* Links -- accent color for interactive elements (D-01) */
-a {
+/* Links */
+a,
+a:visited,
+a:link {
     color: #4DA6FF !important;
 }
 
-/* Scrollbar theming */
+/* Active tab / selected state in pivot bar */
+ytm-pivot-bar-item-renderer[aria-selected="true"],
+ytm-pivot-bar-item-renderer.iron-selected {
+    color: #4DA6FF !important;
+    border-top-color: #4DA6FF !important;
+}
+
+/* Icon buttons (not subscribe -- preserve red) */
+yt-icon-button:not([aria-label*="Subscribe"]):not([aria-label*="subscribe"]) {
+    color: #FFFFFF !important;
+}
+
+/* ============================================================
+   Text colors
+   ============================================================ */
+
+h1, h2, h3, h4, h5, h6,
+.yt-core-attributed-string,
+.yt-spec-button-shape-next--text {
+    color: #FFFFFF !important;
+}
+
+/* ============================================================
+   Scrollbar theming
+   ============================================================ */
+
 ::-webkit-scrollbar {
     background-color: #000000;
     width: 6px;
