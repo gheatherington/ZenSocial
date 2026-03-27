@@ -42,6 +42,17 @@ struct ContentView: View {
             FloatingPillButton(nav: nav)
         }
         .preferredColorScheme(.dark)
+        .onChange(of: nav.activeScreen) { oldValue, _ in
+            // Pause videos on the platform being left (D-01, D-02)
+            switch oldValue {
+            case .instagram:
+                instagramState.pauseAllVideos()
+            case .youtube:
+                youtubeState.pauseAllVideos()
+            case .home:
+                break
+            }
+        }
         .onAppear {
             nav.restoreLastPlatform()
         }

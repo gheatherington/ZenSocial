@@ -5,7 +5,11 @@ import UIKit
 class WebViewCoordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
     let platform: Platform
     var state: WebViewState
-    weak var webView: WKWebView?
+    weak var webView: WKWebView? {
+        didSet {
+            state.webView = webView
+        }
+    }
 
     init(platform: Platform, state: WebViewState) {
         self.platform = platform
