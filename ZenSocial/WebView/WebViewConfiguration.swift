@@ -31,6 +31,12 @@ enum WebViewConfiguration {
 
         // Prepare WKUserContentController for Phase 2 injection
         let contentController = WKUserContentController()
+
+        // Phase 2: Inject platform-specific dark theme CSS
+        if let themeScript = ScriptLoader.themeScript(for: platform) {
+            contentController.addUserScript(themeScript)
+        }
+
         config.userContentController = contentController
 
         return config
