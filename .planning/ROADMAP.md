@@ -57,7 +57,7 @@ Plans:
 
 Plans:
 - [x] 01.2-01-PLAN.md — Video pause on switch, pill visibility gating, edge-to-edge layout
-- [ ] 01.2-02-PLAN.md — Pill drag spring animation and direction-aware expansion
+- [x] 01.2-02-PLAN.md — Pill drag spring animation and direction-aware expansion
 
 ### Phase 2: Injection Engine + Dark Theme
 **Goal**: ZenSocial's dark, minimal theme is visibly applied to both Instagram and YouTube, proving the injection pipeline works end-to-end

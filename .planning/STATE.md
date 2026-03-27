@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: Phase complete — ready for verification
-stopped_at: Completed 01.2-01-PLAN.md
-last_updated: "2026-03-27T03:42:37.374Z"
+stopped_at: Completed 01.2-02-PLAN.md
+last_updated: "2026-03-27T03:43:33.962Z"
 progress:
   total_phases: 6
   completed_phases: 2
@@ -51,6 +51,7 @@ Plan: 2 of 2
 | Phase 01.1 P01 | 3min | 2 tasks | 6 files |
 | Phase 01.1 P02 | 6min | 2 tasks | 6 files |
 | Phase 01.2 P01 | 3min | 2 tasks | 3 files |
+| Phase 01.2 P02 | 3min | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -70,6 +71,8 @@ Recent decisions affecting current work:
 - [Phase 01.1]: ZStack-always-rendered architecture: both PlatformTabView instances always in hierarchy, toggled via opacity+allowsHitTesting
 - [Phase 01.1]: Explicit withAnimation blocks over implicit .animation() modifiers to prevent animation conflicts
 - [Phase 01.2]: Used .onChange(of: nav.activeScreen) for reliable video pause on platform switch
+- [Phase 01.2]: Matched existing spring parameters (0.35/0.8) for drag release animation consistency
+- [Phase 01.2]: Used 172pt expandedPillWidth for direction-aware expansion offset calculation
 
 ### Roadmap Evolution
 
@@ -85,6 +88,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-27T03:42:37.371Z
-Stopped at: Completed 01.2-01-PLAN.md
+Last session: 2026-03-27T03:43:33.959Z
+Stopped at: Completed 01.2-02-PLAN.md
 Resume file: None
