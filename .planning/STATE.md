@@ -91,9 +91,10 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260327-0lt | Fix FloatingPillButton drag tracking and centered expansion logic | 2026-03-27 | e8c1703 | [260327-0lt-fix-floatingpillbutton-drag-tracking-and](./quick/260327-0lt-fix-floatingpillbutton-drag-tracking-and/) |
+| 260327-19t | Fix floating pill drag -- pill follows finger in real-time, no jump on release | 2026-03-27 | 568c787 | [260327-19t-fix-floating-pill-drag-pill-doesn-t-foll](./quick/260327-19t-fix-floating-pill-drag-pill-doesn-t-foll/) |
 
 ## Session Continuity
 
-Last session: 2026-03-27T03:43:33.959Z
-Stopped at: Completed 01.2-02-PLAN.md
+Last session: 2026-03-27T13:41:27Z
+Stopped at: Completed quick-260327-19t (awaiting human verification)
 Resume file: None
