@@ -2,14 +2,14 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Ready to execute
-stopped_at: Completed 01.1-02-PLAN.md
-last_updated: "2026-03-26T16:29:55.112Z"
+status: Phase complete — ready for verification
+stopped_at: Completed 01.2-02-PLAN.md
+last_updated: "2026-03-27T03:43:33.962Z"
 progress:
-  total_phases: 5
+  total_phases: 6
   completed_phases: 2
-  total_plans: 5
-  completed_plans: 5
+  total_plans: 7
+  completed_plans: 6
 ---
 
 # Project State
@@ -50,6 +50,7 @@ Plan: 2 of 2
 | Phase 01 P02 | 3min | 2 tasks | 3 files |
 | Phase 01.1 P01 | 3min | 2 tasks | 6 files |
 | Phase 01.1 P02 | 6min | 2 tasks | 6 files |
+| Phase 01.2 P02 | 3min | 2 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -68,6 +69,8 @@ Recent decisions affecting current work:
 - [Phase 01.1]: LoadingVariant as standalone enum for reuse; launcher cards as private structs in HomeScreenView
 - [Phase 01.1]: ZStack-always-rendered architecture: both PlatformTabView instances always in hierarchy, toggled via opacity+allowsHitTesting
 - [Phase 01.1]: Explicit withAnimation blocks over implicit .animation() modifiers to prevent animation conflicts
+- [Phase 01.2]: Matched existing spring parameters (0.35/0.8) for drag release animation consistency
+- [Phase 01.2]: Used 172pt expandedPillWidth for direction-aware expansion offset calculation
 
 ### Roadmap Evolution
 
@@ -83,6 +86,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-26T16:29:55.109Z
-Stopped at: Completed 01.1-02-PLAN.md
+Last session: 2026-03-27T03:43:33.959Z
+Stopped at: Completed 01.2-02-PLAN.md
 Resume file: None
