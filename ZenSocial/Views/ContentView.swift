@@ -15,10 +15,12 @@ struct ContentView: View {
             PlatformTabView(platform: .instagram, state: instagramState)
                 .opacity(nav.activePlatform == .instagram ? 1 : 0)
                 .allowsHitTesting(nav.activePlatform == .instagram)
+                .ignoresSafeArea(.container, edges: .bottom)
 
             PlatformTabView(platform: .youtube, state: youtubeState)
                 .opacity(nav.activePlatform == .youtube ? 1 : 0)
                 .allowsHitTesting(nav.activePlatform == .youtube)
+                .ignoresSafeArea(.container, edges: .bottom)
 
             // Layer 2: Home screen (shown when activeScreen == .home)
             if nav.activeScreen == .home {
@@ -38,8 +40,10 @@ struct ContentView: View {
                 .transition(.opacity)
             }
 
-            // Layer 3: Floating pill button (always on top)
-            FloatingPillButton(nav: nav)
+            // Layer 3: Floating pill button (only on platform screens, per D-03, D-04)
+            if nav.activePlatform != nil {
+                FloatingPillButton(nav: nav)
+            }
         }
         .preferredColorScheme(.dark)
         .onChange(of: nav.activeScreen) { oldValue, _ in
