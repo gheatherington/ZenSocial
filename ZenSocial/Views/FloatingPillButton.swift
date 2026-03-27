@@ -2,7 +2,7 @@ import SwiftUI
 
 struct FloatingPillButton: View {
     @Bindable var nav: NavigationState
-    @State private var dragOffset: CGSize = .zero
+    @GestureState private var dragTranslation: CGSize = .zero
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private let pillSize: CGFloat = 56
@@ -34,8 +34,10 @@ struct FloatingPillButton: View {
                     collapsedPill
                 }
             }
-            .position(nav.pillPosition)
-            .offset(dragOffset)
+            .position(CGPoint(
+                x: nav.pillPosition.x + dragTranslation.width,
+                y: nav.pillPosition.y + dragTranslation.height
+            ))
         }
     }
 
@@ -125,18 +127,24 @@ struct FloatingPillButton: View {
 
     private var dragGesture: some Gesture {
         DragGesture()
-            .onChanged { value in
-                dragOffset = value.translation
+            .updating($dragTranslation) { value, state, _ in
+                state = value.translation
             }
             .onEnded { value in
-                let newPosition = CGPoint(
+                let final = CGPoint(
                     x: nav.pillPosition.x + value.translation.width,
                     y: nav.pillPosition.y + value.translation.height
                 )
-                let clamped = clampedPosition(newPosition)
-                // Clear dragOffset FIRST — this matches what Phase 01.1 did and keeps
-                // SwiftUI's state consistent before animating nav.pillPosition.
-                dragOffset = .zero
+                let clamped = clampedPosition(final)
+                // Set pill to its current visual position with NO animation.
+                // This matches where the pill is at the moment @GestureState resets
+                // dragTranslation to .zero, preventing any visible jump.
+                var noAnim = Transaction()
+                noAnim.disablesAnimations = true
+                withTransaction(noAnim) {
+                    nav.pillPosition = final
+                }
+                // Then spring-animate to the clamped edge position.
                 if reduceMotion {
                     nav.pillPosition = clamped
                 } else {
