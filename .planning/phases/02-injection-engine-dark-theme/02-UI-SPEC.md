@@ -107,7 +107,7 @@ This phase has minimal user-facing copy. The only new UI text is the script-load
 |---------|------|
 | Alert title (script failure) | "Theme failed to load" |
 | Alert message (script failure) | "{Platform} theme could not be applied. The app will work normally without it." |
-| Alert dismiss button | "OK" |
+| Alert dismiss button | "Dismiss" |
 | Alert report button | "Report Issue" |
 | Share sheet pre-populated text | "ZenSocial theme loading failed\nPlatform: {platform}\niOS: {version}\nApp: {build}\nScript: {filename}" |
 
@@ -131,7 +131,7 @@ ZenSocial/
 ### Injection Rules
 
 | Rule | Value | Source |
-|------|-------|-------|
+|------|-------|--------|
 | Injection timing | `atDocumentStart` | D-08 — prevents FOUC |
 | Injection method | CSS wrapped in JS: `document.documentElement.style` or `<style>` element prepended to `<head>` | CLAUDE.md pattern |
 | Scope | `forMainFrameOnly: false` | Theme must apply to iframes (Instagram uses iframes for some modals) |
@@ -186,7 +186,7 @@ This phase uses no component library, no shadcn, and no third-party registries. 
 2. Injection skipped for failed script
 3. Failure logged via `os_log` with subsystem and category
 4. Native SwiftUI alert presented: "Theme failed to load"
-5. User taps "OK" to dismiss, or "Report Issue" to open share sheet
+5. User taps "Dismiss" to close alert, or "Report Issue" to open share sheet
 6. Share sheet pre-populated with diagnostic text
 7. Platform loads with its default (light) theme — fully functional, just unthemed
 
