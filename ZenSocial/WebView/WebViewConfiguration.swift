@@ -32,9 +32,15 @@ enum WebViewConfiguration {
         // Prepare WKUserContentController for Phase 2 injection
         let contentController = WKUserContentController()
 
-        // Phase 2: Inject platform-specific dark theme CSS
+        // Phase 2: Inject platform-specific dark theme CSS (atDocumentStart, FOUC-free)
         if let themeScript = ScriptLoader.themeScript(for: platform) {
             contentController.addUserScript(themeScript)
+        }
+
+        // Phase 2: Nav bar fixer — uses getComputedStyle to target fixed/sticky elements
+        // that CSS selectors cannot reach (class-based backgrounds, not inline styles).
+        if let navScript = ScriptLoader.navFixerScript(for: platform) {
+            contentController.addUserScript(navScript)
         }
 
         config.userContentController = contentController

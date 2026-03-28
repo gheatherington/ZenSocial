@@ -20,6 +20,31 @@ enum ScriptLoader {
 
     // MARK: - Public API
 
+    /// Loads the platform-specific nav-fixer JS from the app bundle and returns a WKUserScript
+    /// configured for injection at atDocumentEnd. The nav fixer uses getComputedStyle to find
+    /// fixed/sticky elements that CSS selectors cannot target and forces dark backgrounds via
+    /// el.style.setProperty, which overrides class-based styles that !important CSS cannot reach.
+    ///
+    /// Returns nil on failure (non-fatal — theme CSS still applies).
+    static func navFixerScript(for platform: Platform) -> WKUserScript? {
+        let filename = "nav-fixer"
+        let subdirectory = "Scripts/\(platform.displayName)"
+
+        guard let url = Bundle.main.url(
+            forResource: filename,
+            withExtension: "js",
+            subdirectory: subdirectory
+        ), let js = try? String(contentsOf: url, encoding: .utf8) else {
+            return nil
+        }
+
+        return WKUserScript(
+            source: js,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: false
+        )
+    }
+
     /// Loads the platform-specific dark theme CSS from the app bundle, wraps it in a JS IIFE,
     /// and returns a WKUserScript configured for injection at atDocumentStart.
     ///
