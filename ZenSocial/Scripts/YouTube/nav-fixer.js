@@ -3,7 +3,7 @@
 // Also forces black on the "You're not signed in" account page (YouTube's JS
 // can override CSS !important by setting inline styles; el.style.setProperty
 // with 'important' priority beats inline styles).
-// Runs at atDocumentEnd; re-runs on SPA mutations via MutationObserver.
+// Runs at atDocumentEnd; re-runs on SPA mutations via MutationObserver and pushState interception.
 // D-11: Does not touch navigator.serviceWorker, Notification, or PushManager.
 (function () {
     'use strict';
@@ -250,6 +250,24 @@
         }
     }
 
+    // SPA navigation interception — YouTube uses pushState for tab switches.
+    // Fires theme fixers immediately on route change, before DOM mutations accumulate.
+    function onSPANavigate() {
+        applyNavTheme();
+        fixAccountPage();
+        restoreSignedOutCTA();
+        // Follow-up for late-painting Polymer/LitElement components
+        setTimeout(applyNavTheme, 150);
+        setTimeout(fixAccountPage, 300);
+        setTimeout(restoreSignedOutCTA, 300);
+    }
+
+    var _pushState = history.pushState.bind(history);
+    var _replaceState = history.replaceState.bind(history);
+    history.pushState = function() { _pushState.apply(history, arguments); onSPANavigate(); };
+    history.replaceState = function() { _replaceState.apply(history, arguments); onSPANavigate(); };
+    window.addEventListener('popstate', onSPANavigate);
+
     applyNavTheme();
     fixAccountPage();
     restoreSignedOutCTA();
@@ -268,6 +286,6 @@
             fixAccountPage();
             restoreSignedOutCTA();
             timer = null;
-        }, 300);
+        }, 0);
     }).observe(document.documentElement, { childList: true, subtree: true });
 })();
