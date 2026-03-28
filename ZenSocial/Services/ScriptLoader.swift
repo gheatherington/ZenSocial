@@ -94,6 +94,7 @@ enum ScriptLoader {
         return """
         (function() {
             var s = document.createElement('style');
+            s.id = 'zen-theme';
             s.textContent = `\(escaped)`;
             document.documentElement.appendChild(s);
         })();
