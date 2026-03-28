@@ -83,8 +83,8 @@ ytm-pivot-bar-item-renderer,
 /* Fixed bottom bar fallback */
 div[style*="position: fixed"],
 div[style*="position:fixed"] {
-    background: #1C1C1E !important;
-    background-color: #1C1C1E !important;
+    background: #000000 !important;
+    background-color: #000000 !important;
     border-top-color: #2C2C2E !important;
 }
 
