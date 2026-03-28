@@ -96,7 +96,11 @@ print(f'Window center   → screen: {wx+228}, {wy+486}')
     sleep 0.5
     echo "==> Relaunching app..."
     xcrun simctl launch booted "$BUNDLE_ID"
-    sleep 2
+    # 8s: UA extraction + WKWebView init + web content render
+    # Pass a custom wait as 3rd arg: ./Scripts/sim-inspect.sh navigate instagram 12
+    WAIT="${3:-8}"
+    echo "==> Waiting ${WAIT}s for content to load..."
+    sleep "$WAIT"
     TS=$(date +%H%M%S)
     OUT="$SCREENSHOT_DIR/screen-$TS.png"
     xcrun simctl io booted screenshot "$OUT"
