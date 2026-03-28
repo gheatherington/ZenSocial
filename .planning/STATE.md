@@ -2,9 +2,9 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Phase 02 Plan 03 — awaiting human verification
-stopped_at: 02-03-PLAN.md Task 4 (checkpoint:human-verify)
-last_updated: "2026-03-28T11:57:00Z"
+status: Phase 02 Plan 03 — awaiting re-verification after post-UAT fixes
+stopped_at: 02-03-PLAN.md Task 4 (checkpoint:human-verify, round 2)
+last_updated: "2026-03-28T12:24:00Z"
 last_activity: 2026-03-28
 progress:
   total_phases: 7
@@ -55,7 +55,7 @@ Plan: 3 of 3 (gap closure plan — awaiting human-verify checkpoint)
 | Phase 01.2 P02 | 3min | 2 tasks | 1 files |
 | Phase 02 P01 | 4min | 2 tasks | 5 files |
 | Phase 02 P02 | 15min | 2 tasks | 3 files |
-| Phase 02 P03 | 2min | 3 tasks | 1 files |
+| Phase 02 P03 | 5min | 4 tasks | 1 files |
 
 ## Accumulated Context
 
@@ -83,6 +83,8 @@ Recent decisions affecting current work:
 - [Phase 02-02]: Instagram bottom nav transparent bug caused by inline style — fixed via fixed-position div pattern selector with !important
 - [Phase 02-03]: Broadened pivot bar selectors to cover [aria-selected], [selected], and .iron-selected for YouTube DOM resilience
 - [Phase 02-03]: Used wildcard attribute selectors ([class*="sign-in"], etc.) as catch-all for unauthenticated page surfaces
+- [Phase 02-03]: SVG icon fill must be targeted directly on svg/path elements -- CSS color on parent custom element does not propagate
+- [Phase 02-03]: YouTube sign-in flow renders Google accounts.google.com within WKWebView -- theme CSS must cover Google's page elements too
 
 ### Roadmap Evolution
 
@@ -110,6 +112,6 @@ None yet.
 ## Session Continuity
 
 Last activity: 2026-03-28
-Last session: 2026-03-28T11:57:00Z
-Stopped at: 02-03-PLAN.md Task 4 (checkpoint:human-verify)
+Last session: 2026-03-28T12:24:00Z
+Stopped at: 02-03-PLAN.md Task 4 (checkpoint:human-verify, round 2 after post-UAT fixes)
 Resume file: .planning/phases/02-injection-engine-dark-theme/02-03-PLAN.md (Task 4)
