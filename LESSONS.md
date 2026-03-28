@@ -53,6 +53,28 @@ Read this at the start of any new session in this repo, especially before changi
 - This pattern applies to both YouTube (`Scripts/YouTube/nav-fixer.js`) and Instagram (`Scripts/Instagram/nav-fixer.js`). Any future platform added to the app will need the same pushState interception if it is a SPA.
 - The `<style id="zen-theme">` tag injected by `ScriptLoader.wrapCSSInJS()` survives SPA navigation — it is not removed. The flash is caused by JS repainting, not the stylesheet disappearing.
 
+## Running the Correct Build in the Simulator
+
+- `xcrun simctl launch booted <bundle-id>` on its own launches whatever version was last installed — not necessarily the one just built. If you've ever built from Xcode, that version stays installed until explicitly replaced.
+- Always run `xcrun simctl install booted <path-to-app>` before launching. This pushes the specific `.app` you just built onto the simulator and replaces whatever was there.
+- The command-line build output lives at:
+  `~/Library/Developer/Xcode/DerivedData/ZenSocial-<hash>/Build/Products/Debug-iphonesimulator/ZenSocial.app`
+- Full sequence that guarantees the latest build is running:
+  ```bash
+  # 1. Build
+  xcodebuild -project ZenSocial.xcodeproj -scheme ZenSocial \
+    -destination 'platform=iOS Simulator,name=iPhone 16' \
+    -configuration Debug build
+
+  # 2. Install the freshly built .app, then launch
+  APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "ZenSocial.app" -path "*/Debug-iphonesimulator/*" | head -1) \
+    && xcrun simctl boot "iPhone 16" 2>/dev/null \
+    && open -a Simulator \
+    && xcrun simctl install booted "$APP_PATH" \
+    && xcrun simctl launch booted com.zensocial.app
+  ```
+- The `install` step is the critical one. Without it you will silently test a stale build.
+
 ## Practical Guardrails For Future Fixes
 
 - Prefer resilient heuristics based on page text, position, and known platform config over brittle class-name-only targeting.
