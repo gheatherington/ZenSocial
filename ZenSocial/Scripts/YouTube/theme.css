@@ -142,6 +142,66 @@ yt-icon-button:not([aria-label*="Subscribe"]):not([aria-label*="subscribe"]) {
 }
 
 /* ============================================================
+   Custom element accent overrides
+   Gap closure: YouTube mobile uses custom elements, not <a> tags.
+   These do not inherit the `a` color rule.
+   ============================================================ */
+
+/* Action buttons and rendered buttons */
+yt-button-shape,
+ytm-button-renderer,
+ytm-button-renderer .yt-core-attributed-string,
+yt-button-renderer {
+    color: #4DA6FF !important;
+}
+
+/* Chip filter bar (topic chips: Music, Gaming, etc.) */
+yt-chip-cloud-chip-renderer,
+ytm-chip-cloud-chip-renderer,
+yt-chip-cloud-chip-renderer[chip-style="STYLE_HOME_FILTER"],
+ytm-chip-cloud-chip-renderer .yt-core-attributed-string {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+}
+
+/* Selected/active chip */
+yt-chip-cloud-chip-renderer[selected],
+ytm-chip-cloud-chip-renderer[selected],
+yt-chip-cloud-chip-renderer.iron-selected,
+ytm-chip-cloud-chip-renderer.iron-selected {
+    background-color: #4DA6FF !important;
+    color: #000000 !important;
+}
+
+/* Generic div[role=button] interactive elements */
+div[role="button"] .yt-core-attributed-string,
+div[role="button"] yt-formatted-string {
+    color: #4DA6FF !important;
+}
+
+/* yt-formatted-string used for link-like text */
+yt-formatted-string a,
+yt-formatted-string[link-inherit-color] {
+    color: #4DA6FF !important;
+}
+
+/* Pivot bar active tab -- broaden selector beyond [aria-selected="true"] */
+ytm-pivot-bar-item-renderer[aria-selected],
+ytm-pivot-bar-item-renderer[selected],
+ytm-pivot-bar-item-renderer.iron-selected,
+ytm-pivot-bar-item-renderer[aria-selected="true"] {
+    color: #4DA6FF !important;
+    border-top-color: #4DA6FF !important;
+}
+
+/* Pivot bar item text and icon */
+ytm-pivot-bar-item-renderer .pivot-bar-item-tab,
+ytm-pivot-bar-item-renderer .pivot-bar-icon-tab,
+ytm-pivot-bar-item-renderer yt-icon {
+    color: #FFFFFF !important;
+}
+
+/* ============================================================
    Text colors
    ============================================================ */
 
