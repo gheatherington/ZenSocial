@@ -194,7 +194,41 @@ ytm-pivot-bar-item-renderer[aria-selected="true"] {
     border-top-color: #4DA6FF !important;
 }
 
-/* Pivot bar item text and icon */
+/* Pivot bar active tab -- target inner elements directly */
+ytm-pivot-bar-item-renderer[aria-selected="true"] .pivot-bar-item-tab,
+ytm-pivot-bar-item-renderer[aria-selected="true"] .pivot-bar-icon-tab,
+ytm-pivot-bar-item-renderer[aria-selected="true"] .yt-core-attributed-string,
+ytm-pivot-bar-item-renderer[aria-selected="true"] span,
+ytm-pivot-bar-item-renderer[aria-selected] .pivot-bar-item-tab,
+ytm-pivot-bar-item-renderer[aria-selected] .pivot-bar-icon-tab,
+ytm-pivot-bar-item-renderer[aria-selected] .yt-core-attributed-string,
+ytm-pivot-bar-item-renderer[aria-selected] span,
+ytm-pivot-bar-item-renderer.iron-selected .pivot-bar-item-tab,
+ytm-pivot-bar-item-renderer.iron-selected span {
+    color: #4DA6FF !important;
+}
+
+/* Pivot bar active tab -- SVG icon fill for active state */
+ytm-pivot-bar-item-renderer[aria-selected="true"] yt-icon svg,
+ytm-pivot-bar-item-renderer[aria-selected="true"] yt-icon path,
+ytm-pivot-bar-item-renderer[aria-selected] yt-icon svg,
+ytm-pivot-bar-item-renderer[aria-selected] yt-icon path,
+ytm-pivot-bar-item-renderer.iron-selected yt-icon svg,
+ytm-pivot-bar-item-renderer.iron-selected yt-icon path {
+    fill: #4DA6FF !important;
+    color: #4DA6FF !important;
+}
+
+/* Pivot bar active tab -- target via tab container class */
+ytm-pivot-bar-renderer .pivot-bar-item-tab[aria-selected="true"],
+ytm-pivot-bar-renderer .pivot-bar-item-tab.iron-selected,
+.pivot-bar-item-tab[aria-selected="true"],
+.pivot-bar-item-tab[aria-selected] {
+    color: #4DA6FF !important;
+    border-top-color: #4DA6FF !important;
+}
+
+/* Pivot bar item text and icon (inactive -- white) */
 ytm-pivot-bar-item-renderer .pivot-bar-item-tab,
 ytm-pivot-bar-item-renderer .pivot-bar-icon-tab,
 ytm-pivot-bar-item-renderer yt-icon {
@@ -282,6 +316,84 @@ ytm-content-metadata-view {
 [class*="sign-in"] {
     background-color: #1C1C1E !important;
     color: #FFFFFF !important;
+}
+
+/* ============================================================
+   In-app sign-in page/view
+   Gap closure: The actual sign-in form (not the "not signed in"
+   landing) uses different containers with grey/white backgrounds.
+   ============================================================ */
+
+/* Sign-in page-level containers */
+ytm-signin-page-view,
+.sign-in-page,
+.ytm-signin-view,
+#signin-page,
+[page-subtype="signin"],
+ytm-browse[page-subtype="signin"],
+ytm-single-column-browse-results-renderer {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* Google sign-in iframe/overlay area */
+.signin-container,
+.signin-form,
+#signin-container,
+.consent-container,
+.auth-container,
+[class*="signin"],
+[class*="login"],
+[id*="signin"],
+[id*="login"] {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* Google account chooser and sign-in card surfaces */
+.account-chooser,
+.account-card,
+.auth-page-card,
+[class*="account-chooser"],
+[class*="account-card"] {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+}
+
+/* Catch-all for any remaining white/grey containers on sign-in flow */
+ytm-app > div,
+ytm-app > div > div {
+    background-color: #000000 !important;
+}
+
+/* Third-party sign-in page rendered in WKWebView (accounts.google.com) */
+body[data-ogpc],
+body[data-ogsr],
+#initialView,
+#headingSubtext,
+.kHn9Lb,
+.lCoei,
+.N3Hzgf,
+.TnvOCe,
+.Aqtjhf,
+.OVnw0d,
+.Wt5Tfe,
+.qhFLie,
+.d2CFce,
+#yDmH0d,
+.rFrNMe {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* Google sign-in page input fields */
+body[data-ogpc] input,
+body[data-ogsr] input,
+.whsOnd,
+.zHQkBf {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+    border-color: #4DA6FF !important;
 }
 
 /* ============================================================
