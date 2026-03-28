@@ -299,7 +299,7 @@ ytm-browse ytm-section-list-renderer {
 
 /* "You're not signed in" page containers — full-page, use pure black */
 ytm-account-controller,
-ytm-account-controller > *,
+ytm-account-controller > *:not(yt-button-shape):not(ytm-button-renderer):not(yt-button-renderer):not(button):not([role="button"]),
 .sign-in-container,
 .ytm-auth-screens,
 ytm-inline-message-renderer {
@@ -322,6 +322,49 @@ ytm-upsell-dialog-renderer .yt-core-attributed-string {
     color: #FFFFFF !important;
 }
 
+/* Signed-out CTA restore — the broad surface rules above can catch the
+   primary Sign in button's wrapper, so reassert its blue fill/border here. */
+ytm-account-controller ytm-button-renderer,
+ytm-account-controller yt-button-renderer,
+ytm-account-controller yt-button-shape:not(.yt-spec-button-shape-next--text):not(.yt-spec-button-shape-next--tonal),
+ytm-inline-message-renderer ytm-button-renderer,
+ytm-inline-message-renderer yt-button-renderer,
+ytm-inline-message-renderer yt-button-shape:not(.yt-spec-button-shape-next--text):not(.yt-spec-button-shape-next--tonal),
+yt-upsell-dialog-renderer ytm-button-renderer,
+yt-upsell-dialog-renderer yt-button-renderer,
+yt-upsell-dialog-renderer yt-button-shape:not(.yt-spec-button-shape-next--text):not(.yt-spec-button-shape-next--tonal),
+ytm-upsell-dialog-renderer ytm-button-renderer,
+ytm-upsell-dialog-renderer yt-button-renderer,
+ytm-upsell-dialog-renderer yt-button-shape:not(.yt-spec-button-shape-next--text):not(.yt-spec-button-shape-next--tonal),
+ytm-account-controller button,
+ytm-inline-message-renderer button,
+yt-upsell-dialog-renderer button,
+ytm-upsell-dialog-renderer button {
+    background: #4DA6FF !important;
+    background-color: #4DA6FF !important;
+    border: 1px solid #4DA6FF !important;
+    border-color: #4DA6FF !important;
+}
+
+ytm-account-controller ytm-button-renderer .yt-core-attributed-string,
+ytm-account-controller yt-button-renderer .yt-core-attributed-string,
+ytm-account-controller yt-button-shape .yt-core-attributed-string,
+ytm-inline-message-renderer ytm-button-renderer .yt-core-attributed-string,
+ytm-inline-message-renderer yt-button-renderer .yt-core-attributed-string,
+ytm-inline-message-renderer yt-button-shape .yt-core-attributed-string,
+yt-upsell-dialog-renderer ytm-button-renderer .yt-core-attributed-string,
+yt-upsell-dialog-renderer yt-button-renderer .yt-core-attributed-string,
+yt-upsell-dialog-renderer yt-button-shape .yt-core-attributed-string,
+ytm-upsell-dialog-renderer ytm-button-renderer .yt-core-attributed-string,
+ytm-upsell-dialog-renderer yt-button-renderer .yt-core-attributed-string,
+ytm-upsell-dialog-renderer yt-button-shape .yt-core-attributed-string,
+ytm-account-controller button,
+ytm-inline-message-renderer button,
+yt-upsell-dialog-renderer button,
+ytm-upsell-dialog-renderer button {
+    color: #FFFFFF !important;
+}
+
 /* Generic panels and cards that appear on unauthenticated pages */
 .ytm-browse-page,
 ytm-page-manager,
@@ -334,7 +377,7 @@ ytm-content-metadata-view {
 [class*="watch-card"],
 [class*="upsell"],
 [class*="auth-screen"],
-[class*="sign-in"] {
+[class*="sign-in"]:not(yt-button-shape):not(ytm-button-renderer):not(yt-button-renderer):not(button):not([role="button"]) {
     background-color: #1C1C1E !important;
     color: #FFFFFF !important;
 }
