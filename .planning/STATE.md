@@ -108,6 +108,7 @@ None yet.
 | 260327-ioe | Insert Phase 3 push notifications, renumber phases, create context | 2026-03-27 | df9fcf6 | [260327-ioe-insert-phase-3-push-notifications-renumb](./quick/260327-ioe-insert-phase-3-push-notifications-renumb/) |
 | 260327-t3s | Add navigate+watch commands to sim-inspect.sh and create sim-inspect skill | 2026-03-28 | 8dc5c35 | [260327-t3s-sim-inspect-navigate-watch-skill](./quick/260327-t3s-sim-inspect-navigate-watch-skill/) |
 | 260328-a01 | Change navbar colors to match the background | 2026-03-28 | e456e83 | [260328-a01-navbar-color-match-background](./quick/260328-a01-navbar-color-match-background/) |
+| 260328-cli | Add version tracking — build number auto-increments on each commit | 2026-03-28 | a742f58 | [260328-cli-add-version-tracking-to-project-incremen](./quick/260328-cli-add-version-tracking-to-project-incremen/) |
 
 ## Session Continuity
 
