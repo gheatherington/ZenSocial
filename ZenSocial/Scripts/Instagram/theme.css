@@ -51,28 +51,12 @@ html {
 header,
 [role="banner"],
 header[role="banner"],
-/* Instagram-specific top nav class patterns */
-div[class*="x1yc453h"],
-div[class*="x1lq5wgf"],
 /* Sticky positioned top bars */
-div[style*="position: sticky"][style*="top: 0"],
-div[style*="position:sticky"][style*="top:0"] {
+div[style*="position: sticky"],
+div[style*="position:sticky"] {
+    background: #1C1C1E !important;
     background-color: #1C1C1E !important;
     border-bottom-color: #2C2C2E !important;
-}
-
-/* Deeper top nav elements that may have their own background */
-header *,
-[role="banner"] * {
-    background-color: transparent !important;
-}
-
-/* But restore background for interactive elements inside the nav */
-header a,
-header button,
-[role="banner"] a,
-[role="banner"] button {
-    background-color: transparent !important;
 }
 
 /* ============================================================
@@ -83,19 +67,14 @@ header button,
    ============================================================ */
 
 [role="navigation"],
+nav,
 nav[role="navigation"],
-/* Fixed positioned bottom bar pattern */
-div[style*="position: fixed"][style*="bottom"],
-div[style*="position:fixed"][style*="bottom"] {
+/* Fixed positioned elements (Instagram bottom bar, cookie banners, etc.) */
+div[style*="position: fixed"],
+div[style*="position:fixed"] {
+    background: #1C1C1E !important;
     background-color: #1C1C1E !important;
     border-top-color: #2C2C2E !important;
-}
-
-/* Specifically target bottom nav tab bar icons/items */
-[role="navigation"] a,
-[role="navigation"] [role="link"],
-[role="navigation"] [role="button"] {
-    background-color: transparent !important;
 }
 
 /* ============================================================
