@@ -101,10 +101,11 @@ None yet.
 | 260327-19t | Fix floating pill drag -- pill follows finger in real-time, no jump on release | 2026-03-27 | 568c787 | [260327-19t-fix-floating-pill-drag-pill-doesn-t-foll](./quick/260327-19t-fix-floating-pill-drag-pill-doesn-t-foll/) |
 | 260327-d97 | Fix floating pill tap-to-expand regression after drag tracking change | 2026-03-27 | 86ca29c | [260327-d97-fix-floating-pill-tap-to-expand-regressi](./quick/260327-d97-fix-floating-pill-tap-to-expand-regressi/) |
 | 260327-ioe | Insert Phase 3 push notifications, renumber phases, create context | 2026-03-27 | df9fcf6 | [260327-ioe-insert-phase-3-push-notifications-renumb](./quick/260327-ioe-insert-phase-3-push-notifications-renumb/) |
+| 260327-t3s | Add navigate+watch commands to sim-inspect.sh and create sim-inspect skill | 2026-03-28 | - | [260327-t3s-sim-inspect-navigate-watch-skill](./quick/260327-t3s-sim-inspect-navigate-watch-skill/) |
 
 ## Session Continuity
 
-Last activity: 2026-03-27
+Last activity: 2026-03-28
 Last session: 2026-03-27T23:30:00Z
 Stopped at: Completed 02-02-PLAN.md
 Resume file: .planning/phases/03-push-notifications/ (next phase)

@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 # sim-inspect.sh — Build, install, launch, and screenshot ZenSocial in the iOS Simulator.
 # Usage:
-#   ./Scripts/sim-inspect.sh                     # build + install + launch + screenshot
-#   ./Scripts/sim-inspect.sh screenshot          # screenshot only (app already running)
-#   ./Scripts/sim-inspect.sh tap <x> <y>         # tap at coordinates
+#   ./Scripts/sim-inspect.sh                       # build + install + launch + screenshot
+#   ./Scripts/sim-inspect.sh screenshot            # screenshot only (app already running)
+#   ./Scripts/sim-inspect.sh tap <x> <y>           # tap at coordinates (unreliable on Metal windows)
 #   ./Scripts/sim-inspect.sh scroll <x> <y> <dx> <dy>  # swipe gesture
+#   ./Scripts/sim-inspect.sh navigate <platform>   # set UserDefaults + relaunch to platform (instagram|youtube|home)
+#   ./Scripts/sim-inspect.sh watch [interval]      # screenshot loop every N seconds (default 3), Ctrl+C to stop
+#   ./Scripts/sim-inspect.sh winpos                # print simulator window position and suggested tap coords
 
 set -euo pipefail
 
@@ -30,6 +33,8 @@ case "$CMD" in
     # Requires: cliclick installed (brew install cliclick), Simulator window on primary display.
     # Usage: ./Scripts/sim-inspect.sh tap <device_x> <device_y>
     # Device points for iPhone 17: 402x874
+    # NOTE: cliclick is unreliable on Simulator — the Metal-rendered window doesn't respond to
+    # synthetic mouse events. Use `navigate` for tab switching instead.
     # Run `./Scripts/sim-inspect.sh winpos` first to verify window position.
     DEVICE_X="${2:?tap requires device_x}"
     DEVICE_Y="${3:?tap requires device_y}"
@@ -77,6 +82,38 @@ print(f'Window center   → screen: {wx+228}, {wy+486}')
     OUT="$SCREENSHOT_DIR/screen-$TS.png"
     xcrun simctl io booted screenshot "$OUT"
     echo "$OUT"
+    ;;
+
+  navigate)
+    # Navigate to a platform tab by writing to the app's UserDefaults and relaunching.
+    # Exploits NavigationState.restoreLastPlatform() which reads @AppStorage("lastPlatform") on init.
+    # No simulator coordinate clicking needed — reliable across all window positions.
+    PLATFORM="${2:?navigate requires platform (instagram|youtube|home)}"
+    echo "==> Setting lastPlatform to '$PLATFORM'..."
+    xcrun simctl spawn booted defaults write com.zensocial.app lastPlatform "$PLATFORM"
+    echo "==> Terminating app..."
+    xcrun simctl terminate booted "$BUNDLE_ID" 2>/dev/null || true
+    sleep 0.5
+    echo "==> Relaunching app..."
+    xcrun simctl launch booted "$BUNDLE_ID"
+    sleep 2
+    TS=$(date +%H%M%S)
+    OUT="$SCREENSHOT_DIR/screen-$TS.png"
+    xcrun simctl io booted screenshot "$OUT"
+    echo "$OUT"
+    ;;
+
+  watch)
+    # Screenshot loop for continuous monitoring while iterating on CSS/theme changes.
+    # Prints each path — open the latest file in Preview or use `qlmanage -p <path>` to view.
+    INTERVAL="${2:-3}"
+    echo "==> Watching simulator (every ${INTERVAL}s). Ctrl+C to stop."
+    while true; do
+      TS=$(date +%H%M%S)
+      OUT="$SCREENSHOT_DIR/screen-$TS.png"
+      xcrun simctl io booted screenshot "$OUT" 2>/dev/null && echo "$OUT"
+      sleep "$INTERVAL"
+    done
     ;;
 
   build|*)
