@@ -129,10 +129,19 @@ a:link {
     color: #4DA6FF !important;
 }
 
-/* Active tab / selected state in pivot bar */
+/* Active tab / selected state in pivot bar — try every known attribute variant */
 ytm-pivot-bar-item-renderer[aria-selected="true"],
-ytm-pivot-bar-item-renderer.iron-selected {
+ytm-pivot-bar-item-renderer[aria-selected],
+ytm-pivot-bar-item-renderer[aria-current="page"],
+ytm-pivot-bar-item-renderer[aria-current],
+ytm-pivot-bar-item-renderer[active],
+ytm-pivot-bar-item-renderer[selected],
+ytm-pivot-bar-item-renderer.active,
+ytm-pivot-bar-item-renderer.iron-selected,
+ytm-pivot-bar-item-renderer.ytm-tab-active,
+ytm-pivot-bar-item-renderer[data-active="true"] {
     color: #4DA6FF !important;
+    fill: #4DA6FF !important;
     border-top-color: #4DA6FF !important;
 }
 
@@ -147,11 +156,16 @@ yt-icon-button:not([aria-label*="Subscribe"]):not([aria-label*="subscribe"]) {
    These do not inherit the `a` color rule.
    ============================================================ */
 
-/* Action buttons and rendered buttons */
+/* Filled/CTA buttons — white text on colored background (Sign In, Subscribe, etc.) */
 yt-button-shape,
 ytm-button-renderer,
-ytm-button-renderer .yt-core-attributed-string,
 yt-button-renderer {
+    color: #FFFFFF !important;
+}
+
+/* Text/link style buttons — blue accent (only when explicitly text-style) */
+yt-button-shape.yt-spec-button-shape-next--text,
+yt-button-shape.yt-spec-button-shape-next--tonal {
     color: #4DA6FF !important;
 }
 
@@ -185,16 +199,7 @@ yt-formatted-string[link-inherit-color] {
     color: #4DA6FF !important;
 }
 
-/* Pivot bar active tab -- broaden selector beyond [aria-selected="true"] */
-ytm-pivot-bar-item-renderer[aria-selected],
-ytm-pivot-bar-item-renderer[selected],
-ytm-pivot-bar-item-renderer.iron-selected,
-ytm-pivot-bar-item-renderer[aria-selected="true"] {
-    color: #4DA6FF !important;
-    border-top-color: #4DA6FF !important;
-}
-
-/* Pivot bar active tab -- target inner elements directly */
+/* Pivot bar active tab — inner elements (text + icon), all selector variants */
 ytm-pivot-bar-item-renderer[aria-selected="true"] .pivot-bar-item-tab,
 ytm-pivot-bar-item-renderer[aria-selected="true"] .pivot-bar-icon-tab,
 ytm-pivot-bar-item-renderer[aria-selected="true"] .yt-core-attributed-string,
@@ -203,32 +208,42 @@ ytm-pivot-bar-item-renderer[aria-selected] .pivot-bar-item-tab,
 ytm-pivot-bar-item-renderer[aria-selected] .pivot-bar-icon-tab,
 ytm-pivot-bar-item-renderer[aria-selected] .yt-core-attributed-string,
 ytm-pivot-bar-item-renderer[aria-selected] span,
+ytm-pivot-bar-item-renderer[aria-current] .pivot-bar-item-tab,
+ytm-pivot-bar-item-renderer[aria-current] span,
+ytm-pivot-bar-item-renderer[active] .pivot-bar-item-tab,
+ytm-pivot-bar-item-renderer[active] span,
+ytm-pivot-bar-item-renderer[selected] .pivot-bar-item-tab,
+ytm-pivot-bar-item-renderer[selected] span,
+ytm-pivot-bar-item-renderer.active .pivot-bar-item-tab,
+ytm-pivot-bar-item-renderer.active span,
 ytm-pivot-bar-item-renderer.iron-selected .pivot-bar-item-tab,
-ytm-pivot-bar-item-renderer.iron-selected span {
+ytm-pivot-bar-item-renderer.iron-selected span,
+ytm-pivot-bar-item-renderer.ytm-tab-active span {
     color: #4DA6FF !important;
 }
 
-/* Pivot bar active tab -- SVG icon fill for active state */
+/* Pivot bar active tab — SVG icon fill, all selector variants */
 ytm-pivot-bar-item-renderer[aria-selected="true"] yt-icon svg,
 ytm-pivot-bar-item-renderer[aria-selected="true"] yt-icon path,
 ytm-pivot-bar-item-renderer[aria-selected] yt-icon svg,
 ytm-pivot-bar-item-renderer[aria-selected] yt-icon path,
+ytm-pivot-bar-item-renderer[aria-current] yt-icon svg,
+ytm-pivot-bar-item-renderer[aria-current] yt-icon path,
+ytm-pivot-bar-item-renderer[active] yt-icon svg,
+ytm-pivot-bar-item-renderer[active] yt-icon path,
+ytm-pivot-bar-item-renderer[selected] yt-icon svg,
+ytm-pivot-bar-item-renderer[selected] yt-icon path,
+ytm-pivot-bar-item-renderer.active yt-icon svg,
+ytm-pivot-bar-item-renderer.active yt-icon path,
 ytm-pivot-bar-item-renderer.iron-selected yt-icon svg,
-ytm-pivot-bar-item-renderer.iron-selected yt-icon path {
+ytm-pivot-bar-item-renderer.iron-selected yt-icon path,
+ytm-pivot-bar-item-renderer.ytm-tab-active yt-icon svg,
+ytm-pivot-bar-item-renderer.ytm-tab-active yt-icon path {
     fill: #4DA6FF !important;
     color: #4DA6FF !important;
 }
 
-/* Pivot bar active tab -- target via tab container class */
-ytm-pivot-bar-renderer .pivot-bar-item-tab[aria-selected="true"],
-ytm-pivot-bar-renderer .pivot-bar-item-tab.iron-selected,
-.pivot-bar-item-tab[aria-selected="true"],
-.pivot-bar-item-tab[aria-selected] {
-    color: #4DA6FF !important;
-    border-top-color: #4DA6FF !important;
-}
-
-/* Pivot bar item text and icon (inactive -- white) */
+/* Pivot bar item text and icon (inactive — white) */
 ytm-pivot-bar-item-renderer .pivot-bar-item-tab,
 ytm-pivot-bar-item-renderer .pivot-bar-icon-tab,
 ytm-pivot-bar-item-renderer yt-icon {
@@ -324,33 +339,48 @@ ytm-content-metadata-view {
    landing) uses different containers with grey/white backgrounds.
    ============================================================ */
 
-/* Sign-in page-level containers */
+/* Sign-in page — all known containers */
 ytm-signin-page-view,
+ytm-auth-page,
+ytm-sign-in-page,
 .sign-in-page,
 .ytm-signin-view,
 #signin-page,
 [page-subtype="signin"],
 ytm-browse[page-subtype="signin"],
-ytm-single-column-browse-results-renderer {
+ytm-single-column-browse-results-renderer,
+ytm-account-manager,
+ytm-multi-page-manager,
+ytm-single-column-watch-next-results-renderer {
     background-color: #000000 !important;
     color: #FFFFFF !important;
 }
 
-/* Google sign-in iframe/overlay area */
+/* Sign-in inner content — card, form, and overlay surfaces */
 .signin-container,
 .signin-form,
 #signin-container,
 .consent-container,
 .auth-container,
+ytm-account-item-section-renderer,
+ytm-account-header-renderer,
+ytm-account-link-section-renderer {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+}
+
+/* Catch-all: any element whose class or ID contains signin/login/auth */
 [class*="signin"],
 [class*="login"],
 [id*="signin"],
-[id*="login"] {
+[id*="login"],
+[class*="auth-screen"],
+[class*="auth-page"] {
     background-color: #000000 !important;
     color: #FFFFFF !important;
 }
 
-/* Google account chooser and sign-in card surfaces */
+/* Google account chooser surfaces */
 .account-chooser,
 .account-card,
 .auth-page-card,
@@ -360,7 +390,7 @@ ytm-single-column-browse-results-renderer {
     color: #FFFFFF !important;
 }
 
-/* Catch-all for any remaining white/grey containers on sign-in flow */
+/* Hard catch-all: direct children of ytm-app that form full-page views */
 ytm-app > div,
 ytm-app > div > div {
     background-color: #000000 !important;
