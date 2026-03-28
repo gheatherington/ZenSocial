@@ -74,6 +74,7 @@ Plans:
 Plans:
 - [x] 02-01-PLAN.md — ScriptLoader service + Instagram/YouTube theme CSS + WebViewConfiguration integration
 - [x] 02-02-PLAN.md — Script failure alert UI (D-10) + human visual verification of dark theme
+- [ ] 02-03-PLAN.md — Gap closure: YouTube accent color on custom elements + unauthenticated page theming (awaiting human-verify)
 
 **Note on Push Notifications:** Push notification support is intentionally deferred to Phase 3. Phase 2 CSS/JS injection MUST NOT interfere with Instagram's service worker registration, PWA manifest, or the Push/Notification web APIs — this is a hard prerequisite for Phase 3 to work. Specifically, Phase 2 scripts must not block requests to service worker paths (e.g. `/sw.js`), must not strip `<link rel="manifest">` elements, and must not override or disable `navigator.serviceWorker`, `Notification`, or `PushManager`.
 
@@ -136,7 +137,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Native Shell + WKWebView Foundation | 0/3 | Planning complete | - |
-| 2. Injection Engine + Dark Theme | 2/2 | Complete | 2026-03-27 |
+| 2. Injection Engine + Dark Theme | 2/3 | Plan 03 awaiting human-verify | 2026-03-27 |
 | 3. Push Notifications | 0/TBD | Not started | - |
 | 4. Feature Blocking | 0/TBD | Not started | - |
 | 5. Settings UI | 0/TBD | Not started | - |
