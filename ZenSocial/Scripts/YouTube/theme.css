@@ -297,13 +297,19 @@ ytm-browse ytm-section-list-renderer {
     color: #FFFFFF !important;
 }
 
-/* Sign-in prompt / upsell card */
+/* "You're not signed in" page containers — full-page, use pure black */
 ytm-account-controller,
+ytm-account-controller > *,
 .sign-in-container,
 .ytm-auth-screens,
-yt-upsell-dialog-renderer,
-ytm-upsell-dialog-renderer,
 ytm-inline-message-renderer {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* Upsell/promo card within that page — slightly raised surface */
+yt-upsell-dialog-renderer,
+ytm-upsell-dialog-renderer {
     background-color: #1C1C1E !important;
     color: #FFFFFF !important;
 }
@@ -396,12 +402,19 @@ ytm-app > div > div {
     background-color: #000000 !important;
 }
 
-/* Third-party sign-in page rendered in WKWebView (accounts.google.com) */
-body[data-ogpc],
-body[data-ogsr],
-#initialView,
-#headingSubtext,
+/* Third-party sign-in page rendered in WKWebView (accounts.google.com)
+   Google's sign-in uses Material Design components with deep nesting.
+   c-wiz is Google's web component shell — only present on Google pages,
+   safe to use as a scoping ancestor without affecting YouTube pages. */
+
+/* Top-level page containers */
+#yDmH0d,
+c-wiz,
+c-wiz > div,
+c-wiz > div > div,
+c-wiz > div > div > div,
 .kHn9Lb,
+.rFrNMe,
 .lCoei,
 .N3Hzgf,
 .TnvOCe,
@@ -409,21 +422,147 @@ body[data-ogsr],
 .OVnw0d,
 .Wt5Tfe,
 .qhFLie,
-.d2CFce,
-#yDmH0d,
-.rFrNMe {
+.d2CFce {
     background-color: #000000 !important;
     color: #FFFFFF !important;
 }
 
+/* Material Design surface/card containers */
+c-wiz .UieLPc,
+c-wiz .z80M1,
+c-wiz .mhCrEb,
+c-wiz .Qr7Oae,
+c-wiz .sSzDje,
+c-wiz .YZQbRe,
+c-wiz .VfPpkd-cnG4Wd,
+c-wiz [data-screen-id],
+c-wiz [jsname],
+c-wiz [jscontroller],
+c-wiz form,
+c-wiz section,
+c-wiz header,
+c-wiz footer,
+c-wiz main,
+c-wiz .vQX4kf,
+c-wiz .LjDxcd,
+c-wiz .vxx8jf {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* Card-like elevated surfaces (sign-in box) */
+c-wiz .VfPpkd-P5QLlc,
+c-wiz .bTWboc,
+c-wiz .dMNVAe,
+c-wiz .Zf2Cef,
+c-wiz .jXeDnc,
+c-wiz .KTeGk {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+}
+
+/* Headings and text */
+c-wiz h1,
+c-wiz h2,
+c-wiz h3,
+c-wiz p,
+c-wiz span,
+c-wiz label,
+c-wiz .kHn9Lb span,
+c-wiz #headingText,
+c-wiz #headingSubtext,
+c-wiz .iLM0sf {
+    color: #FFFFFF !important;
+}
+
+/* Secondary/muted text */
+c-wiz .kHn9Lb .N3Hzgf,
+c-wiz .EFUnab,
+c-wiz .EKFHED,
+c-wiz .OyEIQ {
+    color: #8E8E93 !important;
+}
+
 /* Google sign-in page input fields */
-body[data-ogpc] input,
-body[data-ogsr] input,
-.whsOnd,
-.zHQkBf {
+c-wiz input[type="email"],
+c-wiz input[type="password"],
+c-wiz input[type="text"],
+c-wiz input[type="tel"],
+c-wiz .whsOnd,
+c-wiz .zHQkBf,
+c-wiz .Xb9hP,
+c-wiz .VfPpkd-fmcmS-wGMbrd {
     background-color: #1C1C1E !important;
     color: #FFFFFF !important;
     border-color: #4DA6FF !important;
+    caret-color: #4DA6FF !important;
+}
+
+/* Input labels and floating labels */
+c-wiz .VfPpkd-rymPhb-fpDzbe-fmcmS,
+c-wiz .AxOyFc,
+c-wiz .VfPpkd-t08AT-Bz112c,
+c-wiz label {
+    color: #8E8E93 !important;
+}
+
+/* Focused input label */
+c-wiz .VfPpkd-t08AT-Bz112c-Bd1Fw,
+c-wiz .CDELXb {
+    color: #4DA6FF !important;
+}
+
+/* Input underline / outline */
+c-wiz .VfPpkd-wJo1Fb-TbvtCe,
+c-wiz .VfPpkd-LgbsSe,
+c-wiz .VfPpkd-NSFCdd-Brv4Fb {
+    border-color: #4DA6FF !important;
+}
+
+/* Buttons — primary (Next, Sign in) */
+c-wiz .VfPpkd-LgbsSe-OWXEXe-k8QpJ,
+c-wiz .VfPpkd-LgbsSe-OWXEXe-dgl2Hf,
+c-wiz button[jsname="LgbsSe"],
+c-wiz .nCP5yc {
+    background-color: #4DA6FF !important;
+    color: #000000 !important;
+}
+
+/* Buttons — secondary/text (Forgot password, Create account) */
+c-wiz .VfPpkd-LgbsSe-OWXEXe-Bz112c,
+c-wiz a[jsname],
+c-wiz .ZFr60d,
+c-wiz .CwaK9 {
+    color: #4DA6FF !important;
+}
+
+/* Dividers and borders */
+c-wiz hr,
+c-wiz .DnExPb {
+    border-color: #2C2C2E !important;
+    background-color: #2C2C2E !important;
+}
+
+/* Account chooser / profile cards */
+c-wiz .JDAKTe,
+c-wiz .FliLIb,
+c-wiz .BHzsHc,
+c-wiz .YZQbRe,
+c-wiz [data-authuser] {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+    border-color: #2C2C2E !important;
+}
+
+/* Avatar images — do NOT override (D-02 exclusion) */
+
+/* Catch-all for deeply nested Google containers within c-wiz */
+c-wiz div[class]:not([class*="yt"]) {
+    background-color: transparent !important;
+}
+c-wiz > div[class]:not([class*="yt"]),
+#yDmH0d > c-wiz {
+    background-color: #000000 !important;
 }
 
 /* ============================================================
