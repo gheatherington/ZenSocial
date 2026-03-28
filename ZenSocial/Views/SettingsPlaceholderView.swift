@@ -1,6 +1,10 @@
 import SwiftUI
 
 struct SettingsPlaceholderView: View {
+    private var buildNumber: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "–"
+    }
+
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
@@ -11,6 +15,9 @@ struct SettingsPlaceholderView: View {
                 Text("Settings coming soon")
                     .font(.body)
                     .foregroundStyle(.white.opacity(0.6))
+                Text("Build \(buildNumber)")
+                    .font(.caption2)
+                    .foregroundStyle(.white.opacity(0.3))
             }
         }
         .navigationTitle("Settings")
