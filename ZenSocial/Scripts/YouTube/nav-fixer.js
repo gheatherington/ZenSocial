@@ -5,7 +5,7 @@
 (function () {
     'use strict';
 
-    var NAV_BG = '#1C1C1E';
+    var NAV_BG = '#000000';
 
     function applyNavTheme() {
         var all = document.querySelectorAll('body *');
