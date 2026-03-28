@@ -235,6 +235,56 @@ h1, h2, h3, h4, h5, h6,
 }
 
 /* ============================================================
+   Unauthenticated page state
+   Gap closure: YouTube's "You're not signed in" landing page
+   renders different components not covered by existing selectors.
+   ============================================================ */
+
+/* Browse shell in unauthenticated state */
+ytm-browse,
+ytm-browse .page-container,
+ytm-browse ytm-section-list-renderer {
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
+}
+
+/* Sign-in prompt / upsell card */
+ytm-account-controller,
+.sign-in-container,
+.ytm-auth-screens,
+yt-upsell-dialog-renderer,
+ytm-upsell-dialog-renderer,
+ytm-inline-message-renderer {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+}
+
+/* Sign-in prompt text */
+ytm-account-controller .yt-core-attributed-string,
+.sign-in-container .yt-core-attributed-string,
+yt-upsell-dialog-renderer .yt-core-attributed-string,
+ytm-upsell-dialog-renderer .yt-core-attributed-string {
+    color: #FFFFFF !important;
+}
+
+/* Generic panels and cards that appear on unauthenticated pages */
+.ytm-browse-page,
+ytm-page-manager,
+ytm-page-manager .content,
+ytm-content-metadata-view {
+    background-color: #000000 !important;
+}
+
+/* Catch any remaining surface with a white/light background */
+[class*="watch-card"],
+[class*="upsell"],
+[class*="auth-screen"],
+[class*="sign-in"] {
+    background-color: #1C1C1E !important;
+    color: #FFFFFF !important;
+}
+
+/* ============================================================
    Exclusions
    D-02: Do NOT style user-generated media (img, video, canvas, svg).
    UI-SPEC rule 5: YouTube brand red (#FF0000) preserved via
