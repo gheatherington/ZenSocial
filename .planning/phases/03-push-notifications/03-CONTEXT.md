@@ -3,138 +3,158 @@ phase: 3
 name: push-notifications
 status: planning
 created: 2026-03-27
+updated: 2026-03-31
 ---
 
 # Phase 3: Push Notifications — Context
 
 ## Goal
 
-Enable Instagram web push notifications within the WKWebView context. Users should receive Instagram push notifications when the app is running in the foreground, and ideally when it is suspended in the background. The "force-quit" (closed app) scenario is the hardest case and requires live testing to determine the correct approach before committing to a full APNs bridge.
+Enable Instagram web push notifications within the WKWebView context. Users must receive Instagram push notifications in the foreground, when the app is suspended in the background, and after force-quit. Force-quit delivery is a hard requirement — this commits Phase 3 to Option B (APNs bridge) rather than Option A (iOS 16.4+ Web Push alone).
 
 <domain>
-Instagram push notifications in WKWebView. This phase is architecturally orthogonal to CSS/JS injection (Phase 2) — it touches native iOS notification infrastructure, service worker registration, and potentially APNs entitlements. It does not require modifying any injection scripts, only ensuring Phase 2 scripts do not break the prerequisites. Scope is Instagram only; YouTube push is not in scope for this phase.
+Instagram push notifications in WKWebView. This phase is architecturally orthogonal to CSS/JS injection (Phase 2) — it touches native iOS notification infrastructure, service worker registration, APNs entitlements, and potentially a backend relay server. Scope is Instagram only; YouTube push is not in scope for this phase.
 </domain>
 
 <decisions>
 
-## Decisions Already Made
+## Implementation Decisions
 
-### D-01: Push notifications extracted from Phase 2 into a dedicated phase
-Push notification support was originally scoped inside Phase 2 (Injection Engine + Dark Theme) but extracted because it is architecturally independent. Phase 2 is about CSS/JS injection. Push is about service workers, WKWebView notification permissions, and potentially APNs entitlements. Mixing them would bloat Phase 2 and make it harder to test each concern in isolation.
+### Architecture
 
-**Consequence:** Phase 2 has a hard prerequisite constraint — it must not break Instagram's PWA or service worker. See Phase 2 Note in ROADMAP.md.
+- **D-01:** Push notifications extracted from Phase 2 into a dedicated phase — architecturally independent concern; mixing would bloat Phase 2 and make it harder to test each concern in isolation.
 
-### D-02: Phase 2 must preserve Instagram's service worker and PWA compatibility
-Phase 2 CSS injection scripts must not:
-- Block or redirect requests to service worker paths (e.g. `/sw.js`, Instagram's SW endpoint)
-- Strip or rewrite `<link rel="manifest">` elements in the DOM
-- Override or disable `navigator.serviceWorker`, `Notification`, or `PushManager` on the `window` object
+- **D-02:** Phase 2 must preserve Instagram's service worker and PWA compatibility. Phase 2 injection scripts must not block service worker paths, strip `<link rel="manifest">`, or override `navigator.serviceWorker`, `Notification`, or `PushManager`. Confirmed by Phase 2 D-11 — this prerequisite is locked in.
 
-This is a non-negotiable prerequisite for Phase 3 to work at all. Verify via Safari Web Inspector before closing Phase 2.
+- **D-03:** Dark theme (Phase 2) and push notifications (Phase 3) are separate concerns. Phase 3 has no UI deliverables beyond the permission prompt and notification banner.
 
-### D-03: Visual cohesion (dark theme) belongs to Phase 2 only
-The dark theme and Phase 3 are separate concerns. Phase 3 has no UI deliverables — it delivers a system capability (push delivery), not a visible interface change.
+### Implementation Approach
 
-### D-04: Investigate Option A before committing to Option B
-The implementation approach is undecided — live testing is required. Start with Option A (iOS 16.4+ Web Push in WKWebView) because it has the lowest complexity. Only escalate to Option B (APNs bridge) if Option A cannot deliver background push when the app is suspended.
+- **D-04 (UPDATED):** Commit to Option B — APNs bridge. Option A (iOS 16.4+ Web Push in WKWebView) does not guarantee force-quit delivery. Phase 3 must handle the force-quit case, so Option B is the target from the start. Research should still verify whether iOS handles APNs registration transparently before building a relay, but the success bar is: all three states (foreground, suspended, force-quit) must deliver.
 
-### D-05: Force-quit push delivery is a nice-to-have, not a hard requirement
-If Option A handles foreground + background (suspended) but not force-quit, that is an acceptable v1 outcome. Document the limitation. Force-quit delivery requires Option B infrastructure which may involve a backend relay — that is a significant scope increase and should only be built if there is confirmed user demand.
+- **D-05 (UPDATED):** Force-quit push delivery is a **hard requirement**, not a nice-to-have. If a user force-quits the app, Instagram push notifications must still arrive. This is what distinguishes ZenSocial as a real replacement for the native Instagram app, not a browser tab.
 
-</decisions>
+- **D-06:** A backend relay server is acceptable if required for force-quit delivery. Also opens the door to future features (notification filtering, cross-device sync). Research should determine whether a relay is strictly necessary or whether the APNs bridge can work end-to-end without one.
 
-<specifics>
+### Option B: APNs Bridge (Target Architecture)
 
-## Implementation Approaches
-
-Three options were evaluated during planning. Pick the best based on live testing:
-
-### Option A: iOS 16.4+ Web Push in WKWebView (investigate first)
-
-**How it works:** Apple added Web Push support to WKWebView in iOS 16.4. When Instagram's service worker calls `PushManager.subscribe()`, the browser-level infrastructure handles delivery via APNs transparently. No custom native code needed beyond granting notification permission via `UNUserNotificationCenter`.
-
-**Trade-offs:**
-- Low complexity — no entitlements, no background modes, no backend
-- Works in foreground confirmed
-- Background (suspended) delivery: likely works, needs verification
-- Force-quit delivery: uncertain — this is the key unknown to test
-- Apple may impose restrictions specific to WKWebView vs Safari that are not documented
-
-**Verification:** Use Safari Web Inspector to confirm service worker registers successfully and `PushManager.subscribe()` resolves without error.
-
-### Option B: APNs bridge (use only if Option A is insufficient)
-
-**How it works:** Instagram's backend sends a push to APNs. The native app receives a silent APNs push (background mode), wakes the app process, triggers the WKWebView to execute a message into the service worker, which surfaces a `UNUserNotificationCenter` local notification.
-
-**Trade-offs:**
-- High complexity — requires APNs entitlements, Background Modes capability (remote-notification), and possibly a backend relay if Instagram's pushes do not reach WKWebView APNs directly
-- Handles force-quit case (iOS will wake the app for silent pushes if Background App Refresh is on)
-- Adds infrastructure dependency (backend relay)
-- More reliable delivery guarantee
+**How it works:** Instagram's backend sends a push to APNs. The native app receives a silent APNs push (Background Modes: remote-notification), wakes the app process, triggers the WKWebView to execute a message into the service worker, which surfaces a `UNUserNotificationCenter` local notification.
 
 **Entitlements needed:**
 - `aps-environment` (development / production)
 - `UIBackgroundModes`: `remote-notification`
 
 **Native APIs:**
-- `UNUserNotificationCenter` — request permission, present local notifications
-- `PKPushRegistry` with `.voIP` type (alternative for guaranteed wake, but App Store scrutiny is high for VoIP misuse — avoid unless necessary)
+- `UNUserNotificationCenter` — request permission, present local notifications, foreground handling delegate
 - `WKScriptMessageHandler` — bridge from native to WKWebView service worker
+- `PKPushRegistry` — only if silent APNs delivery proves unreliable; avoid VoIP type (App Store scrutiny)
 
-### Option C: In-app only (last resort)
+**Backend relay (if needed):**
+- Receives Instagram's Web Push payload
+- Forwards to APNs using device token registered by the native app
+- Lightweight — no user accounts, no storage; stateless relay
 
-**How it works:** Accept that notifications only work while the app is in the foreground. No service worker integration. Optionally poll for notification counts via the web page DOM and surface a badge.
+### Permission UX
 
-**Trade-offs:**
-- Minimal — no infrastructure changes
-- Severely limited UX — notifications are the whole point of this phase
-- Choose only if Options A and B are both technically blocked
+- **D-07:** Permission prompt triggers after the user's first successful Instagram login (not at app launch, not cold). Requesting permission before the user has established context reduces grant rate.
 
-## Native iOS Context
+- **D-08:** A Settings toggle allows the user to disable or re-enable Instagram push notifications after initial grant or denial. If the user denied the iOS system prompt, the Settings toggle links to iOS Settings to re-enable.
 
-**Minimum deployment target:** iOS 17 (Web Push APIs available since iOS 16.4 — we are covered)
+- **D-09:** A brief native pre-prompt (alert or modal) appears before the iOS system permission dialog. Sets context for why ZenSocial is requesting notifications. Copy TBD at implementation — keep it intentional and calm, aligned with ZenSocial's brand (not "never miss a moment" style urgency).
 
-**Existing infrastructure relevant to this phase:**
-- `WebViewConfiguration.swift` — `WKUserContentController` is already wired; notification permission injection script can be added here
-- `DataStoreManager` — separate `WKWebsiteDataStore` per platform; service worker data is stored here; do not use ephemeral data store for Instagram or service worker registration will not persist
-- `UNUserNotificationCenter` — not yet wired in the app; Phase 3 must request permission at app launch or on first Instagram session
+### Foreground & Tap Behavior
 
-**Permission request timing:** Request `UNUserNotificationCenter` permission when the user first visits Instagram, not at app launch. Requesting at launch before context is established reduces grant rate.
+- **D-10:** When a push arrives while the app is in the foreground, intercept it and surface a native `UNUserNotificationCenter` banner. Do not rely on Instagram's in-page notification UI — native banner provides consistent iOS feel across all app states.
 
-## Instagram PWA Specifics
+- **D-11:** Tapping a notification (from any state — foreground banner, background, or force-quit) deep-links Instagram to the relevant content by loading the URL extracted from the push payload. Switch to the Instagram tab if needed.
 
-- Instagram registers a service worker at document load (path varies; verify in Web Inspector)
-- Instagram uses the Push API (`PushManager`) and Notification API — both must be accessible from WKWebView
-- The PWA manifest (`<link rel="manifest">`) must survive Phase 2 injection untouched
-- Service worker scope and registration URL must be verified before closing Phase 2
+### Claude's Discretion
 
-## Key Uncertainty to Investigate
+- Exact payload parsing strategy for extracting deep-link URLs
+- Whether to use `UNNotificationServiceExtension` or handle payload in the main app delegate
+- Silent push vs background fetch for waking the app
+- Notification grouping/threading behavior
+- Badge count handling
 
-**The closed-app question:** Does iOS 16.4+ Web Push in WKWebView automatically deliver notifications after force-quit, or does it require an APNs bridge?
+</decisions>
 
-This is the critical unknown. The answer determines whether Phase 3 is a small feature or a significant infrastructure build. Test with a physical device (simulator does not reliably test APNs delivery).
+<canonical_refs>
+## Canonical References
 
-**Research before starting Phase 3 plans:**
-1. Can `PushManager.subscribe()` succeed in WKWebView on iOS 17+?
-2. Do notifications arrive when the app is backgrounded (suspended)?
-3. Do notifications arrive after force-quit?
-4. Is a backend relay required for Option B, or does WKWebView APNs registration work end-to-end with Instagram's existing push backend?
+**Downstream agents MUST read these before planning or implementing.**
 
-## Deferred Questions
+### Apple Notifications
+- Apple Developer: UNUserNotificationCenter — https://developer.apple.com/documentation/usernotifications/unusernotificationcenter
+- Apple Developer: Registering Your App with APNs — https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns
+- Apple Developer: Handling Notifications and Notification-Related Actions — https://developer.apple.com/documentation/usernotifications/handling_notifications_and_notification-related_actions
 
-1. **Backend relay necessity:** If Option B is required, does it need a ZenSocial-controlled backend to relay push tokens, or does Instagram's APNs send directly to the device? This is unknown until the push token flow is traced.
+### Web Push in WKWebView
+- WebKit Blog: Web Push for Web Apps on iOS — https://webkit.org/blog/13152/webkit-features-in-safari-16-4/ (iOS 16.4 Web Push announcement — relevant even though we're going Option B)
+- W3C Push API — https://www.w3.org/TR/push-api/ (PushManager, PushSubscription)
+- W3C Service Workers — https://www.w3.org/TR/service-workers/ (service worker lifecycle)
 
-2. **Force-quit as hard requirement:** Is force-quit push delivery a launch requirement? Current position (D-05): it is a nice-to-have. If user research or early feedback indicates it is a blocker, escalate to Option B.
+### Project Context
+- `.planning/REQUIREMENTS.md` — Note: "Push notifications from platforms" is currently listed as Out of Scope. REQUIREMENTS.md should be updated before Phase 3 planning closes — push notifications are in scope as of Phase 3 commitment.
+- `.planning/phases/02-injection-engine-dark-theme/02-CONTEXT.md` — D-11 confirms Phase 2 injection scripts do not interfere with service worker, PWA manifest, or web push APIs.
+- `CLAUDE.md` (project-level) — Canonical stack decisions (WKWebView via UIViewRepresentable, WKUserContentController injection pattern).
 
-3. **Notification content:** Can Instagram's push payload (title, body, badge count) be read from the service worker push event and surfaced natively? Verify that the payload is not encrypted in a way that prevents bridging.
+</canonical_refs>
+
+<code_context>
+## Existing Code Insights
+
+### Reusable Assets
+- `ZenSocial/Services/DataStoreManager.swift` — manages separate `WKWebsiteDataStore` per platform; service worker registration data lives here. Phase 3 must NOT use ephemeral data store for Instagram or service worker registration will not persist.
+- `ZenSocial/WebView/WebViewConfiguration.swift` — `WKUserContentController` already wired; notification permission injection script can be added here alongside existing theme scripts.
+- `ZenSocial/Services/ScriptLoader.swift` — existing script loading pattern; Phase 3 may need a small JS bridge script injected at `atDocumentStart` to communicate service worker state to native.
+
+### Established Patterns
+- Script injection via `WKUserContentController` + `WKUserScript` — Phase 3 uses same mechanism for any JS bridge needed between service worker and native
+- Platform-specific script directories (`Scripts/Instagram/`, `Scripts/YouTube/`) — any Phase 3 JS files follow same convention
+
+### Integration Points
+- `UNUserNotificationCenter` is not yet wired anywhere in the app — Phase 3 adds it fresh
+- App delegate or `ZenSocialApp.swift` — notification delegate registration needed at launch
+- Instagram tab / `PlatformTabView.swift` — post-login trigger for permission prompt
+
+</code_context>
+
+<specifics>
+
+## Specific Requirements
+
+- Force-quit delivery is non-negotiable — this is what makes ZenSocial a real Instagram replacement, not a browser tab
+- Backend relay is acceptable; can serve as foundation for future notification features
+- Permission flow: login detected → brief pre-prompt → iOS system dialog → Settings toggle available
+- Foreground behavior: always show native banner, never rely on in-page UI
+- Notification tap: always deep-link, always switch to Instagram tab
+
+## Key Uncertainties to Investigate (Pre-Planning)
+
+1. Can `PushManager.subscribe()` succeed in WKWebView on iOS 17+, and does it register a device token that the native app can intercept?
+2. Is a ZenSocial backend relay strictly required, or does iOS transparently bridge the Web Push → APNs registration?
+3. Does `UIBackgroundModes: remote-notification` wake the app after force-quit reliably for Instagram's push payloads?
+4. Can the push payload be read without decryption (or does the native side receive a pointer to Instagram's encrypted payload)?
+5. What URL format does Instagram include in push payloads for deep-link targets?
 
 </specifics>
 
-<canonical_refs>
-- Apple Developer: UNUserNotificationCenter — https://developer.apple.com/documentation/usernotifications/unusernotificationcenter
-- Apple Developer: Web Push for Web Apps on iOS — https://webkit.org/blog/13152/webkit-features-in-safari-16-4/ (iOS 16.4 Web Push announcement)
-- Apple Developer: Enabling the Push Notifications Capability — https://developer.apple.com/documentation/usernotifications/registering_your_app_with_apns
-- W3C Push API — https://www.w3.org/TR/push-api/ (PushManager, PushSubscription)
-- W3C Service Workers — https://www.w3.org/TR/service-workers/ (service worker lifecycle)
-- WWDC 2023: What's new in Web Inspector — relevant for verifying service worker registration via Safari Web Inspector
-</canonical_refs>
+<deferred>
+## Deferred Ideas
+
+- YouTube push notifications — separate phase; out of scope for Phase 3
+- Notification filtering / quiet hours — future feature enabled by backend relay
+- Cross-device sync of notification preferences — future; depends on backend relay
+
+### Reviewed Todos (not folded)
+- "Stop playing videos after platform has been closed" — matched by keyword but is a media/tab-switching concern, not a push notification concern. Belongs in a polish/bug-fix phase.
+
+### Note on REQUIREMENTS.md
+"Push notifications from platforms" is currently listed as Out of Scope in REQUIREMENTS.md with the rationale "Core driver of compulsive usage; contradicts intentional-use value prop." This entry predates Phase 3 being added to the roadmap and should be removed or moved to Active requirements before Phase 3 planning starts. Downstream agents should treat ROADMAP.md Phase 3 as authoritative.
+
+</deferred>
+
+---
+
+*Phase: 03-push-notifications*
+*Context gathered: 2026-03-31*
