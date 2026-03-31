@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [ ] **Phase 1: Native Shell + WKWebView Foundation** - Working iOS app that loads Instagram and YouTube in a native tab bar with persistent sessions and correct WebView configuration
 - [ ] **Phase 2: Injection Engine + Dark Theme** - CSS/JS injection pipeline proven end-to-end by applying ZenSocial's dark theme to both platforms (push notifications deferred to Phase 3)
-- [ ] **Phase 3: Push Notifications** - Instagram web push notifications working within the WKWebView context for foreground and background app states
+- [ ] **Phase 3: Push Notifications** - Instagram push notifications via native APNs infrastructure with backend relay for all app states including force-quit
 - [ ] **Phase 4: Feature Blocking** - Instagram Reels and YouTube Shorts hidden via two-layer blocking (content rules + DOM injection)
 - [ ] **Phase 5: Settings UI** - Native settings screen where users toggle Reels and Shorts blocking per platform
 
@@ -79,26 +79,22 @@ Plans:
 **Note on Push Notifications:** Push notification support is intentionally deferred to Phase 3. Phase 2 CSS/JS injection MUST NOT interfere with Instagram's service worker registration, PWA manifest, or the Push/Notification web APIs — this is a hard prerequisite for Phase 3 to work. Specifically, Phase 2 scripts must not block requests to service worker paths (e.g. `/sw.js`), must not strip `<link rel="manifest">` elements, and must not override or disable `navigator.serviceWorker`, `Notification`, or `PushManager`.
 
 ### Phase 3: Push Notifications
-**Goal**: Users receive Instagram web push notifications within the WKWebView context while the app is running in the foreground or suspended in the background
-**Depends on**: Phase 2 (injection pipeline in place; Instagram PWA/service worker must not be broken by Phase 2 CSS injection)
+**Goal**: Users receive Instagram push notifications as native iOS banners in all app states (foreground, background, force-quit) via APNs infrastructure with a backend relay server
+**Depends on**: Phase 2 (injection pipeline must not interfere with Instagram's service worker/PWA APIs)
 **Requirements**: PUSH-01, PUSH-02, PUSH-03
 **Success Criteria** (what must be TRUE):
-  1. User receives Instagram push notifications while the app is running in the foreground
+  1. User receives Instagram push notifications while the app is running in the foreground (native iOS banner)
   2. User receives Instagram push notifications while the app is suspended in the background
-  3. The WKWebView correctly requests notification permission from the user (native iOS permission prompt appears)
-  4. Instagram's service worker registers successfully — verifiable via Safari Web Inspector
+  3. User receives Instagram push notifications after force-quitting the app (requires visible APNs, not silent push)
+  4. Native iOS permission prompt appears (preceded by a ZenSocial pre-prompt after first Instagram login)
+  5. Tapping a notification deep-links to the relevant Instagram content
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01-PLAN.md — ScriptLoader service + Instagram/YouTube theme CSS + WebViewConfiguration integration
-- [ ] 02-02-PLAN.md — Script failure alert UI (D-10) + human visual verification of dark theme
+- [ ] 03-01-PLAN.md — Native notification infrastructure (AppDelegate, NotificationManager, permission flow, entitlements, deep-link routing, Settings toggle)
+- [ ] 03-02-PLAN.md — Backend relay server + APNs integration + end-to-end verification (includes architecture decision checkpoint)
 
-**Implementation approaches to investigate (pick best based on research):**
-  - **Option A — iOS 16.4+ Web Push in WKWebView**: Native support available (app minimum target is iOS 17). Works foreground and background. Uncertain whether force-quit delivery works without an APNs bridge. Lowest complexity if sufficient.
-  - **Option B — APNs bridge**: Native app receives silent APNs push, wakes WKWebView service worker, surfaces a local `UNUserNotificationCenter` notification. Requires APNs entitlements, Background Modes capability, and potentially a backend relay server. Handles force-quit case but adds significant infrastructure.
-  - **Option C — In-app only**: Accept that notifications only work while the app is in the foreground. Document limitation clearly. Choose only if Options A and B are not viable.
-
-**Key uncertainty**: Live testing is needed to determine whether iOS 16.4+ Web Push in WKWebView bridges the force-quit gap automatically, or whether the APNs bridge is required. Investigate Option A first before committing to Option B infrastructure.
+**Key research finding:** Web Push does NOT work in WKWebView (confirmed by Apple). The architecture uses native APNs with a backend relay that independently monitors Instagram notifications and sends visible APNs pushes to the device. This delivers in all three states because visible APNs notifications are handled at the OS level regardless of app process state.
 
 ### Phase 4: Feature Blocking
 **Goal**: Instagram Reels and YouTube Shorts are completely hidden from the user experience, with blocking that survives SPA navigation
@@ -108,11 +104,7 @@ Plans:
   1. User does not see the Reels tab in Instagram's bottom navigation bar on any page
   2. User does not see the Shorts tab or Shorts shelf on YouTube's interface on any page
   3. Blocking remains active after navigating within each platform (SPA navigation does not restore blocked elements)
-**Plans**: 2 plans
-
-Plans:
-- [ ] 02-01-PLAN.md — ScriptLoader service + Instagram/YouTube theme CSS + WebViewConfiguration integration
-- [ ] 02-02-PLAN.md — Script failure alert UI (D-10) + human visual verification of dark theme
+**Plans**: TBD
 
 ### Phase 5: Settings UI
 **Goal**: Users can control which features are blocked through a native settings screen
@@ -122,11 +114,7 @@ Plans:
   1. User can open a native settings screen from the app (not a web page)
   2. User can toggle Instagram Reels blocking on and off, and the change takes effect on the next page load or refresh
   3. User can toggle YouTube Shorts blocking on and off, and the change takes effect on the next page load or refresh
-**Plans**: 2 plans
-
-Plans:
-- [ ] 02-01-PLAN.md — ScriptLoader service + Instagram/YouTube theme CSS + WebViewConfiguration integration
-- [ ] 02-02-PLAN.md — Script failure alert UI (D-10) + human visual verification of dark theme
+**Plans**: TBD
 **UI hint**: yes
 
 ## Progress
@@ -138,6 +126,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Native Shell + WKWebView Foundation | 0/3 | Planning complete | - |
 | 2. Injection Engine + Dark Theme | 2/3 | Plan 03 awaiting human-verify | 2026-03-27 |
-| 3. Push Notifications | 0/TBD | Not started | - |
+| 3. Push Notifications | 0/2 | Planning complete | - |
 | 4. Feature Blocking | 0/TBD | Not started | - |
 | 5. Settings UI | 0/TBD | Not started | - |
