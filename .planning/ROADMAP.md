@@ -89,11 +89,12 @@ Plans:
   3. Native iOS permission prompt appears (preceded by a ZenSocial pre-prompt after first Instagram login)
   4. Tapping a notification deep-links to the relevant Instagram content in the ZenSocial Instagram tab
   5. Settings toggle allows user to disable/re-enable notifications; links to iOS Settings if permission was denied
-**Plans**: 3 plans
+**Plans**: 4 plans
 
 Plans:
+- [ ] 03-00-PLAN.md — XCTest target creation and notification test stubs (Wave 0)
 - [ ] 03-01-PLAN.md — NotificationManager service, AppDelegate bridge, permission flow UI, entitlements, REQUIREMENTS.md update
-- [ ] 03-02-PLAN.md — JS notification bridge, NotificationPoller, BGAppRefreshTask, deep-link routing
+- [ ] 03-02-PLAN.md — JS notification bridge, NotificationPoller with cookie-based background polling, BGAppRefreshTask, deep-link routing
 - [ ] 03-03-PLAN.md — Human verification of complete notification flow
 
 **Key research findings:**
@@ -111,12 +112,7 @@ Plans:
   3. With soft block enabled, native Instagram/YouTube push notifications still arrive normally (app not fully restricted)
   4. Tapping "Open in ZenSocial" on the shield opens ZenSocial to the relevant platform tab
   5. User can configure Instagram and YouTube independently (different modes per platform)
-**Plans**: 3 plans
-
-Plans:
-- [ ] 03-01-PLAN.md — NotificationManager service, AppDelegate bridge, permission flow UI, entitlements, REQUIREMENTS.md update
-- [ ] 03-02-PLAN.md — JS notification bridge, NotificationPoller, BGAppRefreshTask, deep-link routing
-- [ ] 03-03-PLAN.md — Human verification of complete notification flow
+**Plans**: TBD
 
 **Key design notes:**
 - Soft block = notification workaround for force-quit state: native APNs delivers, tap redirects to ZenSocial
@@ -133,12 +129,7 @@ Plans:
   1. User does not see the Reels tab in Instagram's bottom navigation bar on any page
   2. User does not see the Shorts tab or Shorts shelf on YouTube's interface on any page
   3. Blocking remains active after navigating within each platform (SPA navigation does not restore blocked elements)
-**Plans**: 3 plans
-
-Plans:
-- [ ] 03-01-PLAN.md — NotificationManager service, AppDelegate bridge, permission flow UI, entitlements, REQUIREMENTS.md update
-- [ ] 03-02-PLAN.md — JS notification bridge, NotificationPoller, BGAppRefreshTask, deep-link routing
-- [ ] 03-03-PLAN.md — Human verification of complete notification flow
+**Plans**: TBD
 
 ### Phase 5: Settings UI
 **Goal**: Users can control which features are blocked through a native settings screen
@@ -148,12 +139,7 @@ Plans:
   1. User can open a native settings screen from the app (not a web page)
   2. User can toggle Instagram Reels blocking on and off, and the change takes effect on the next page load or refresh
   3. User can toggle YouTube Shorts blocking on and off, and the change takes effect on the next page load or refresh
-**Plans**: 3 plans
-
-Plans:
-- [ ] 03-01-PLAN.md — NotificationManager service, AppDelegate bridge, permission flow UI, entitlements, REQUIREMENTS.md update
-- [ ] 03-02-PLAN.md — JS notification bridge, NotificationPoller, BGAppRefreshTask, deep-link routing
-- [ ] 03-03-PLAN.md — Human verification of complete notification flow
+**Plans**: TBD
 **UI hint**: yes
 
 ## Progress
@@ -165,7 +151,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Native Shell + WKWebView Foundation | 0/3 | Planning complete | - |
 | 2. Injection Engine + Dark Theme | 2/3 | Plan 03 awaiting human-verify | 2026-03-27 |
-| 3. Push Notifications | 0/3 | Planning complete | - |
+| 3. Push Notifications | 0/4 | Planning complete (revised) | - |
 | 3.1. Screen Time Controls | 0/TBD | Context captured, not yet planned | - |
 | 4. Feature Blocking | 0/TBD | Not started | - |
 | 5. Settings UI | 0/TBD | Not started | - |
