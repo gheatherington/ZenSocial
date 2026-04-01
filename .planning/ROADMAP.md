@@ -88,12 +88,13 @@ Plans:
   3. User receives Instagram push notifications after force-quitting the app (requires visible APNs, not silent push)
   4. Native iOS permission prompt appears (preceded by a ZenSocial pre-prompt after first Instagram login)
   5. Tapping a notification deep-links to the relevant Instagram content
-**Plans**: 3 plans
+**Plans**: 4 plans
 
 Plans:
 - [ ] 03-00-PLAN.md — Wave 0: XCTest target + test stubs for notification permission and APNs registration
 - [ ] 03-01-PLAN.md — Native notification infrastructure (AppDelegate, NotificationManager, permission flow, entitlements, deep-link routing, Settings toggle, REQUIREMENTS.md update)
-- [ ] 03-02-PLAN.md — Backend relay server + APNs integration + end-to-end verification (includes architecture decision checkpoint)
+- [ ] 03-02-PLAN.md — Architecture decision checkpoint: backend notification monitoring approach (cookie polling, FBNS, or on-device only)
+- [ ] 03-03-PLAN.md — Backend relay server implementation + APNs integration + end-to-end human verification
 
 **Key research finding:** Web Push does NOT work in WKWebView (confirmed by Apple). The architecture uses native APNs with a backend relay that independently monitors Instagram notifications and sends visible APNs pushes to the device. This delivers in all three states because visible APNs notifications are handled at the OS level regardless of app process state.
 
@@ -127,6 +128,6 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Native Shell + WKWebView Foundation | 0/3 | Planning complete | - |
 | 2. Injection Engine + Dark Theme | 2/3 | Plan 03 awaiting human-verify | 2026-03-27 |
-| 3. Push Notifications | 0/3 | Planning complete | - |
+| 3. Push Notifications | 0/4 | Planning complete | - |
 | 4. Feature Blocking | 0/TBD | Not started | - |
 | 5. Settings UI | 0/TBD | Not started | - |
