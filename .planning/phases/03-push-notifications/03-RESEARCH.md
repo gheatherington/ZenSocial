@@ -16,15 +16,15 @@ The viable path forward requires a **polling-based notification check** or **Ins
 
 <user_constraints>
 
-## User Constraints (from CONTEXT.md)
+## User Constraints (from CONTEXT.md, revised 2026-04-01)
 
 ### Locked Decisions
 - **D-01:** Push notifications extracted from Phase 2 into a dedicated phase
 - **D-02:** Phase 2 must preserve Instagram's service worker and PWA compatibility (confirmed by Phase 2 D-11)
 - **D-03:** Dark theme (Phase 2) and push notifications (Phase 3) are separate concerns
-- **D-04 (UPDATED):** Commit to Option B -- APNs bridge. Force-quit delivery required.
-- **D-05 (UPDATED):** Force-quit push delivery is a hard requirement
-- **D-06:** A backend relay server is acceptable if required for force-quit delivery
+- **D-04 (REVISED 2026-04-01):** On-device only. No backend relay. Phase 3 delivers notification handling while the app is running (foreground + background/suspended via BGAppRefreshTask). Force-quit delivery is deferred to Phase 3.1 soft-block.
+- **D-05 (REVISED 2026-04-01):** Force-quit delivery is NOT a Phase 3 requirement. Deferred to Phase 3.1. Delivery story: foreground (Phase 3), background/suspended (Phase 3), force-quit (Phase 3.1 soft-block).
+- **D-06 (REMOVED):** Backend relay is off the table for Phase 3. Storing users' Instagram session credentials on a third-party server violates Meta's ToS and creates security risk. Phase 3.1 solves force-quit without a backend.
 - **D-07:** Permission prompt triggers after user's first successful Instagram login
 - **D-08:** Settings toggle for Instagram push notifications; links to iOS Settings if denied
 - **D-09:** Brief native pre-prompt before iOS system permission dialog
@@ -32,16 +32,18 @@ The viable path forward requires a **polling-based notification check** or **Ins
 - **D-11:** Tapping notification deep-links to relevant Instagram content
 
 ### Claude's Discretion
-- Exact payload parsing strategy for extracting deep-link URLs
+- Exact mechanism for detecting Instagram notifications from within WKWebView (DOM observation, JS bridge, or network interception)
 - Whether to use UNNotificationServiceExtension or handle payload in main app delegate
-- Silent push vs background fetch for waking the app
+- BGAppRefreshTask polling interval and notification diffing strategy
 - Notification grouping/threading behavior
 - Badge count handling
 
 ### Deferred Ideas (OUT OF SCOPE)
+- Force-quit delivery (deferred to Phase 3.1 soft-block)
 - YouTube push notifications
 - Notification filtering / quiet hours
 - Cross-device sync of notification preferences
+- Backend relay server (removed from scope -- ToS + security risk)
 
 </user_constraints>
 
@@ -428,6 +430,7 @@ Key fields:
 | -- | NotificationManager permission flow logic | unit | `xcodebuild test ... -only-testing:ZenSocialTests/NotificationManagerTests` | No -- Wave 0 |
 | -- | APNs token formatting | unit | `xcodebuild test ... -only-testing:ZenSocialTests/APNsTokenTests` | No -- Wave 0 |
 | -- | Deep-link URL parsing from payload | unit | `xcodebuild test ... -only-testing:ZenSocialTests/NotificationPayloadTests` | No -- Wave 0 |
+| -- | NotificationPoller logic (cookie export, HTML parsing, message routing) | unit | `xcodebuild test ... -only-testing:ZenSocialTests/NotificationPollerTests` | No -- Wave 0 |
 
 ### Sampling Rate
 - **Per task commit:** Unit tests only (permission flow, token formatting, payload parsing)
@@ -438,6 +441,7 @@ Key fields:
 - [ ] `ZenSocialTests/NotificationManagerTests.swift` -- permission flow unit tests
 - [ ] `ZenSocialTests/APNsTokenTests.swift` -- token formatting
 - [ ] `ZenSocialTests/NotificationPayloadTests.swift` -- deep-link extraction
+- [ ] `ZenSocialTests/NotificationPollerTests.swift` -- foreground message handling, cookie export, background poll, HTML parsing, settings toggle
 - [ ] XCTest target may need creation if not already in project
 
 **Note:** PUSH-01/02/03 are inherently manual-verification requirements. Push notification delivery cannot be meaningfully tested in automated CI without a real APNs connection and device provisioning. Unit tests cover the logic layer; delivery verification requires physical device testing.
