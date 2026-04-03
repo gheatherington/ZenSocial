@@ -31,6 +31,7 @@
 		A1000016 /* Scripts in Resources */ = {isa = PBXBuildFile; fileRef = A2000016 /* Scripts */; };
 		A1000017 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000017 /* NotificationManager.swift */; };
 		A1000018 /* NotificationPrePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000019 /* NotificationPrePromptView.swift */; };
+		A100001A /* NotificationPoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = A200001A /* NotificationPoller.swift */; };
 		B1000001 /* NotificationManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000001 /* NotificationManagerTests.swift */; };
 		B1000002 /* APNsTokenTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000002 /* APNsTokenTests.swift */; };
 		B1000003 /* NotificationPayloadTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2000003 /* NotificationPayloadTests.swift */; };
@@ -63,6 +64,8 @@
 		A2000017 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		A2000019 /* NotificationPrePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPrePromptView.swift; sourceTree = "<group>"; };
 		A2000018 /* ZenSocial.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ZenSocial.entitlements; sourceTree = "<group>"; };
+		A200001A /* NotificationPoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPoller.swift; sourceTree = "<group>"; };
+		A200001B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3000001 /* ZenSocial.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZenSocial.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2000001 /* NotificationManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerTests.swift; sourceTree = "<group>"; };
 		B2000002 /* APNsTokenTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APNsTokenTests.swift; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 			children = (
 				A2000001 /* ZenSocialApp.swift */,
 				A2000018 /* ZenSocial.entitlements */,
+				A200001B /* Info.plist */,
 				A5000003 /* Models */,
 				A5000004 /* Services */,
 				A5000005 /* WebView */,
@@ -132,6 +136,7 @@
 				A2000007 /* AuthDomains.swift */,
 				A2000015 /* ScriptLoader.swift */,
 				A2000017 /* NotificationManager.swift */,
+				A200001A /* NotificationPoller.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				A1000015 /* ScriptLoader.swift in Sources */,
 				A1000017 /* NotificationManager.swift in Sources */,
 				A1000018 /* NotificationPrePromptView.swift in Sources */,
+				A100001A /* NotificationPoller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -471,6 +477,7 @@
 				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = SZKSGJZ726;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_ADDITIONS_FILE = ZenSocial/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ZenSocial;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -503,6 +510,7 @@
 				CURRENT_PROJECT_VERSION = 29;
 				DEVELOPMENT_TEAM = SZKSGJZ726;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_ADDITIONS_FILE = ZenSocial/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = ZenSocial;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

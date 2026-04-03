@@ -43,6 +43,17 @@ enum WebViewConfiguration {
             contentController.addUserScript(navScript)
         }
 
+        // Phase 3: Instagram notification bridge (atDocumentEnd, foreground badge detection)
+        if let notifScript = ScriptLoader.notificationBridgeScript(for: platform) {
+            contentController.addUserScript(notifScript)
+        }
+
+        // Phase 3: Register WKScriptMessageHandler for Instagram notification bridge messages.
+        // NotificationPoller.shared is a singleton; no retain-cycle risk with WKUserContentController.
+        if platform == .instagram {
+            contentController.add(NotificationPoller.shared, name: "zenNotification")
+        }
+
         config.userContentController = contentController
 
         return config

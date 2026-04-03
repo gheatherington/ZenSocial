@@ -1,5 +1,6 @@
 import SwiftUI
 import UserNotifications
+import BackgroundTasks
 
 @main
 struct ZenSocialApp: App {
@@ -29,6 +30,11 @@ struct ZenSocialApp: App {
                 await NotificationManager.shared.refreshAuthorizationStatus()
                 uaReady = true
             }
+            // Phase 3: Schedule background notification check when app goes to background.
+            // The OS will wake the app via BGAppRefreshTask per the schedule.
+            .onReceive(NotificationCenter.default.publisher(for: UIApplication.didEnterBackgroundNotification)) { _ in
+                NotificationPoller.shared.scheduleBackgroundRefresh()
+            }
             .preferredColorScheme(.dark)
         }
     }
@@ -45,6 +51,11 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         // Register NotificationManager as the UNUserNotificationCenter delegate
         // so it can intercept foreground notifications (D-10) and handle taps (D-11).
         UNUserNotificationCenter.current().delegate = NotificationManager.shared
+
+        // Phase 3: Register BGAppRefreshTask handler for background notification polling.
+        // Must be called before app finishes launching (BGTaskScheduler requirement).
+        NotificationPoller.shared.registerBackgroundTask()
+
         return true
     }
 

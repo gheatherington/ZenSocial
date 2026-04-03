@@ -45,6 +45,35 @@ enum ScriptLoader {
         )
     }
 
+    /// Loads the Instagram notification bridge JS from the app bundle and returns a WKUserScript
+    /// configured for injection at atDocumentEnd (after DOM is ready).
+    ///
+    /// The bridge detects Instagram's notification badge changes via DOM observation +
+    /// MutationObserver, then sends messages to native via the zenNotification
+    /// WKScriptMessageHandler channel. Only injected for Instagram (returns nil for YouTube).
+    ///
+    /// Returns nil on failure (non-fatal -- foreground notification detection simply won't fire).
+    static func notificationBridgeScript(for platform: Platform) -> WKUserScript? {
+        guard platform == .instagram else { return nil }
+        let filename = "notification-bridge"
+        let subdirectory = "Scripts/\(platform.displayName)"
+
+        guard let url = Bundle.main.url(
+            forResource: filename,
+            withExtension: "js",
+            subdirectory: subdirectory
+        ), let js = try? String(contentsOf: url, encoding: .utf8) else {
+            logger.warning("[ScriptLoader] notification-bridge.js not found for Instagram -- foreground badge detection disabled")
+            return nil
+        }
+
+        return WKUserScript(
+            source: js,
+            injectionTime: .atDocumentEnd,
+            forMainFrameOnly: true
+        )
+    }
+
     /// Loads the platform-specific dark theme CSS from the app bundle, wraps it in a JS IIFE,
     /// and returns a WKUserScript configured for injection at atDocumentStart.
     ///
