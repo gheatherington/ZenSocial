@@ -60,5 +60,24 @@ struct ContentView: View {
         .onAppear {
             nav.restoreLastPlatform()
         }
+        // Phase 3: Deep-link on notification tap (D-11).
+        // NotificationManager.didReceive posts .zenNotificationTapped with ["url": URL].
+        // We route to Instagram tab and signal the WKWebView to load the URL.
+        .onReceive(NotificationCenter.default.publisher(for: .zenNotificationTapped)) { notification in
+            if let url = notification.userInfo?["url"] as? URL {
+                nav.navigateToInstagram(url: url)
+            }
+        }
+        // Phase 3: Load target URL in the existing Instagram WKWebView.
+        // Uses the weak webView reference from instagramState (set by PlatformWebView coordinator).
+        // Per Pitfall 6: MUST use the existing WKWebView instance to preserve session cookies
+        // from DataStoreManager's per-platform WKWebsiteDataStore.
+        .onReceive(NotificationCenter.default.publisher(for: .zenDeepLinkNavigation)) { notification in
+            guard let url = notification.userInfo?["url"] as? URL,
+                  let platform = notification.userInfo?["platform"] as? String,
+                  platform == "instagram"
+            else { return }
+            instagramState.webView?.load(URLRequest(url: url))
+        }
     }
 }

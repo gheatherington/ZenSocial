@@ -3,6 +3,15 @@ import Observation
 import SwiftUI
 import UIKit
 
+// MARK: - Deep-Link Notification Names
+
+extension Notification.Name {
+    /// Posted by NavigationState.navigateToInstagram(url:) after switching to the Instagram tab.
+    /// ContentView observes this to load the URL in the existing Instagram WKWebView.
+    /// userInfo: ["url": URL, "platform": String]
+    static let zenDeepLinkNavigation = Notification.Name("zenDeepLinkNavigation")
+}
+
 @Observable
 @MainActor
 class NavigationState {
@@ -37,6 +46,18 @@ class NavigationState {
         if screen != .home {
             lastPlatformRaw = screen.rawValue
         }
+    }
+
+    /// Switches to Instagram tab and posts .zenDeepLinkNavigation for ContentView to load the URL.
+    /// Used by notification tap deep-linking (D-11): tapping a notification routes here,
+    /// which navigates to Instagram and signals the WKWebView to load the target URL.
+    func navigateToInstagram(url: URL) {
+        navigate(to: .instagram)
+        NotificationCenter.default.post(
+            name: .zenDeepLinkNavigation,
+            object: nil,
+            userInfo: ["url": url, "platform": "instagram"]
+        )
     }
 
     func restoreLastPlatform() {
