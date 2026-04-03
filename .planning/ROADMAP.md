@@ -92,9 +92,9 @@ Plans:
 **Plans**: 4 plans
 
 Plans:
-- [ ] 03-00-PLAN.md — XCTest target creation and notification test stubs (Wave 0)
-- [ ] 03-01-PLAN.md — NotificationManager service, AppDelegate bridge, permission flow UI, entitlements, REQUIREMENTS.md update
-- [ ] 03-02-PLAN.md — JS notification bridge, NotificationPoller with cookie-based background polling, BGAppRefreshTask, deep-link routing
+- [x] 03-00-PLAN.md — XCTest target creation and notification test stubs (Wave 0)
+- [x] 03-01-PLAN.md — NotificationManager service, AppDelegate bridge, permission flow UI, entitlements, REQUIREMENTS.md update
+- [x] 03-02-PLAN.md — JS notification bridge, NotificationPoller with cookie-based background polling, BGAppRefreshTask, deep-link routing
 - [ ] 03-03-PLAN.md — Human verification of complete notification flow
 
 **Key research findings:**
@@ -151,7 +151,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4 -> 5
 |-------|----------------|--------|-----------|
 | 1. Native Shell + WKWebView Foundation | 0/3 | Planning complete | - |
 | 2. Injection Engine + Dark Theme | 2/3 | Plan 03 awaiting human-verify | 2026-03-27 |
-| 3. Push Notifications | 0/4 | Planning complete (revised) | - |
+| 3. Push Notifications | 3/4 | In Progress|  |
 | 3.1. Screen Time Controls | 0/TBD | Context captured, not yet planned | - |
 | 4. Feature Blocking | 0/TBD | Not started | - |
 | 5. Settings UI | 0/TBD | Not started | - |

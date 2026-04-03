@@ -34,8 +34,8 @@
 
 ### Push Notifications
 
-- [ ] **PUSH-01**: User receives Instagram push notifications as native iOS banners while ZenSocial is in the foreground
-- [ ] **PUSH-02**: User receives Instagram push notifications while ZenSocial is suspended in the background (via BGAppRefreshTask polling)
+- [x] **PUSH-01**: User receives Instagram push notifications as native iOS banners while ZenSocial is in the foreground
+- [x] **PUSH-02**: User receives Instagram push notifications while ZenSocial is suspended in the background (via BGAppRefreshTask polling)
 
 ### Settings
 
@@ -99,8 +99,8 @@
 | INJ-02 | Phase 2 | Complete |
 | INJ-03 | Phase 2 | Complete |
 | INJ-04 | Phase 2 | Complete |
-| PUSH-01 | Phase 3 | Pending |
-| PUSH-02 | Phase 3 | Pending |
+| PUSH-01 | Phase 3 | Complete |
+| PUSH-02 | Phase 3 | Complete |
 | BLOCK-01 | Phase 4 | Pending |
 | BLOCK-02 | Phase 4 | Pending |
 | SET-01 | Phase 4 | Pending |

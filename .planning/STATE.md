@@ -2,15 +2,15 @@
 gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
-status: Phase 02 Plan 03 — awaiting re-verification after post-UAT fixes
-stopped_at: 02-03-PLAN.md Task 4 (checkpoint:human-verify, round 2)
-last_updated: "2026-03-28T12:24:00Z"
-last_activity: 2026-03-28
+status: Phase complete — ready for verification
+stopped_at: Completed 03-02-PLAN.md
+last_updated: "2026-04-03T13:59:51.153Z"
+last_activity: 2026-04-03
 progress:
-  total_phases: 7
+  total_phases: 8
   completed_phases: 4
-  total_plans: 10
-  completed_plans: 10
+  total_plans: 14
+  completed_plans: 13
 ---
 
 # Project State
@@ -56,6 +56,7 @@ Plan: 3 of 3 (gap closure plan — awaiting human-verify checkpoint)
 | Phase 02 P01 | 4min | 2 tasks | 5 files |
 | Phase 02 P02 | 15min | 2 tasks | 3 files |
 | Phase 02 P03 | 5min | 4 tasks | 1 files |
+| Phase 03 P02 | 6min | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -85,6 +86,8 @@ Recent decisions affecting current work:
 - [Phase 02-03]: Used wildcard attribute selectors ([class*="sign-in"], etc.) as catch-all for unauthenticated page surfaces
 - [Phase 02-03]: SVG icon fill must be targeted directly on svg/path elements -- CSS color on parent custom element does not propagate
 - [Phase 02-03]: YouTube sign-in flow renders Google accounts.google.com within WKWebView -- theme CSS must cover Google's page elements too
+- [Phase 03]: MainActor.assumeIsolated used in WKScriptMessageHandler -- iOS 26 SDK marks WKScriptMessage properties @MainActor; WebKit guarantees main thread delivery
+- [Phase 03]: INFOPLIST_ADDITIONS_FILE used for BGTaskSchedulerPermittedIdentifiers -- preserves GENERATE_INFOPLIST_FILE and all INFOPLIST_KEY_* settings
 
 ### Roadmap Evolution
 
@@ -115,7 +118,7 @@ None yet.
 
 ## Session Continuity
 
-Last activity: 2026-03-28
-Last session: 2026-03-28T13:53:32Z
-Stopped at: Completed quick/260328-dqm — minimize CSS injection delay (YouTube + Instagram)
-Resume file: .planning/phases/02-injection-engine-dark-theme/02-03-PLAN.md (Task 4)
+Last activity: 2026-04-03
+Last session: 2026-04-03T13:59:51.150Z
+Stopped at: Completed 03-02-PLAN.md
+Resume file: None
