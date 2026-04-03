@@ -44,6 +44,17 @@ struct PlatformTabView: View {
         .sheet(item: $state.pendingAuthURL) { url in
             AuthModalView(platform: platform, url: url)
         }
+        // D-09: Notification pre-prompt after first Instagram login
+        .notificationPrePrompt(
+            isPresented: $state.showNotificationPrePrompt,
+            onEnable: {
+                NotificationManager.shared.markPrePromptShown()
+                _ = await NotificationManager.shared.requestPermission()
+            },
+            onDismiss: {
+                NotificationManager.shared.markPrePromptShown()
+            }
+        )
         // D-10: Script load failure alert (release builds only)
         .onReceive(NotificationCenter.default.publisher(for: .zenScriptLoadFailure)) { notification in
             guard let notifPlatform = notification.userInfo?["platform"] as? String,

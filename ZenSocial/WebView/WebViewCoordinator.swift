@@ -80,6 +80,16 @@ class WebViewCoordinator: NSObject, WKNavigationDelegate, WKUIDelegate {
 
         // Re-enable bounces after each navigation (RESEARCH Pitfall 5)
         webView.scrollView.bounces = true
+
+        // D-07: Detect Instagram login completion for notification pre-prompt.
+        // Trigger only once per install, after the user transitions away from the login page to the feed.
+        if platform == .instagram,
+           let url = webView.url,
+           !url.absoluteString.contains("/accounts/login"),
+           url.host?.contains("instagram.com") == true,
+           NotificationManager.shared.shouldShowPrePrompt {
+            state.showNotificationPrePrompt = true
+        }
     }
 
     func webView(

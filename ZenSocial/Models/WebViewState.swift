@@ -25,6 +25,7 @@ class WebViewState {
     var canGoBack: Bool = false
     var canGoForward: Bool = false
     var currentURL: URL? = nil
+    var showNotificationPrePrompt: Bool = false
 
     func pauseAllVideos() {
         webView?.evaluateJavaScript("document.querySelectorAll('video').forEach(v => v.pause())", completionHandler: nil)

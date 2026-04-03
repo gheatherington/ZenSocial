@@ -32,6 +32,11 @@
 - [ ] **BLOCK-02**: YouTube Shorts tab is hidden on initial load and across SPA navigation
 - [x] **BLOCK-03**: User-agent is spoofed to a Safari UA to prevent Instagram/YouTube from detecting WKWebView
 
+### Push Notifications
+
+- [ ] **PUSH-01**: User receives Instagram push notifications as native iOS banners while ZenSocial is in the foreground
+- [ ] **PUSH-02**: User receives Instagram push notifications while ZenSocial is suspended in the background (via BGAppRefreshTask polling)
+
 ### Settings
 
 - [ ] **SET-01**: User can toggle Instagram Reels blocking on/off from a native settings screen
@@ -66,7 +71,8 @@
 
 | Feature | Reason |
 |---------|--------|
-| Push notifications from platforms | Core driver of compulsive usage; contradicts intentional-use value prop |
+| YouTube push notifications | Out of scope for Phase 3; Instagram only |
+| Force-quit notification delivery | Handled by Phase 3.1 Screen Time soft-block |
 | Multi-account switching | Significant session management complexity; defer entirely |
 | Backend / user accounts / cloud sync | No server infrastructure needed; settings stored locally |
 | Gamification (streaks, leaderboards) | Creates its own compulsion loop; contradicts calm brand |
@@ -93,16 +99,18 @@
 | INJ-02 | Phase 2 | Complete |
 | INJ-03 | Phase 2 | Complete |
 | INJ-04 | Phase 2 | Complete |
-| BLOCK-01 | Phase 3 | Pending |
-| BLOCK-02 | Phase 3 | Pending |
+| PUSH-01 | Phase 3 | Pending |
+| PUSH-02 | Phase 3 | Pending |
+| BLOCK-01 | Phase 4 | Pending |
+| BLOCK-02 | Phase 4 | Pending |
 | SET-01 | Phase 4 | Pending |
 | SET-02 | Phase 4 | Pending |
 
 **Coverage:**
-- v1 requirements: 17 total
-- Mapped to phases: 17
+- v1 requirements: 19 total
+- Mapped to phases: 19
 - Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-24*
-*Last updated: 2026-03-24 after roadmap creation*
+*Last updated: 2026-04-02 — Phase 3 execution: added PUSH-01, PUSH-02; moved BLOCK-01/02 from Phase 3 to Phase 4; updated Out of Scope*

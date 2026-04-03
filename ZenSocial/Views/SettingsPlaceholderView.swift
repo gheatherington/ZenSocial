@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SettingsPlaceholderView: View {
+    private var notificationManager = NotificationManager.shared
+
     private var buildNumber: String {
         Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "–"
     }
@@ -8,19 +10,40 @@ struct SettingsPlaceholderView: View {
     var body: some View {
         ZStack {
             Color.black.ignoresSafeArea()
-            VStack(spacing: 16) {
-                Image(systemName: "gearshape.fill")
-                    .font(.system(size: 48))
-                    .foregroundStyle(Color.zenInactiveGray)
-                Text("Settings coming soon")
-                    .font(.body)
-                    .foregroundStyle(.white.opacity(0.6))
-                Text("Build \(buildNumber)")
-                    .font(.caption2)
-                    .foregroundStyle(.white.opacity(0.3))
+            List {
+                Section("Notifications") {
+                    switch notificationManager.authorizationStatus {
+                    case .authorized, .provisional, .ephemeral:
+                        Toggle("Instagram Notifications", isOn: Binding(
+                            get: { notificationManager.userWantsNotifications },
+                            set: { notificationManager.userWantsNotifications = $0 }
+                        ))
+                    case .denied:
+                        Button("Open Settings to Enable") {
+                            notificationManager.openAppSettings()
+                        }
+                    case .notDetermined:
+                        Button("Enable Notifications") {
+                            Task { _ = await notificationManager.requestPermission() }
+                        }
+                    @unknown default:
+                        EmptyView()
+                    }
+                }
+
+                Section {
+                    Text("Build \(buildNumber)")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
             }
+            .scrollContentBackground(.hidden)
+            .listStyle(.insetGrouped)
         }
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await notificationManager.refreshAuthorizationStatus()
+        }
     }
 }
