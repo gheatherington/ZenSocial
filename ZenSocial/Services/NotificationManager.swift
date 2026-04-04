@@ -16,11 +16,17 @@ class NotificationManager: NSObject, UNUserNotificationCenterDelegate {
 
     // Has the pre-prompt been shown at least once?
     @ObservationIgnored
-    @AppStorage("notificationPrePromptShown") private var prePromptShown: Bool = false
+    private var prePromptShown: Bool {
+        get { UserDefaults.standard.bool(forKey: "notificationPrePromptShown") }
+        set { UserDefaults.standard.set(newValue, forKey: "notificationPrePromptShown") }
+    }
 
     // User's in-app toggle preference (persisted, respected by Plan 02 polling)
     @ObservationIgnored
-    @AppStorage("notificationsEnabled") var userWantsNotifications: Bool = true
+    var userWantsNotifications: Bool {
+        get { UserDefaults.standard.object(forKey: "notificationsEnabled") as? Bool ?? true }
+        set { UserDefaults.standard.set(newValue, forKey: "notificationsEnabled") }
+    }
 
     // MARK: - Singleton
 
