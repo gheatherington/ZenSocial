@@ -292,13 +292,24 @@ extension NotificationPoller: WKScriptMessageHandler {
                 if type == "badge_change" {
                     let timestamp = body["timestamp"] as? TimeInterval ?? Date().timeIntervalSince1970 * 1000
                     let epochSeconds = timestamp / 1000.0
-                    guard epochSeconds > self.lastForegroundNotificationEpoch + 60 else { return }
+                    guard epochSeconds > self.lastForegroundNotificationEpoch + 30 else { return }
                     self.lastForegroundNotificationEpoch = epochSeconds
+
+                    let badgeType = body["badgeType"] as? String ?? "activity"
+                    let notifBody: String
+                    let notifURL: String
+                    if badgeType == "dm" {
+                        notifBody = "You have a new direct message on Instagram"
+                        notifURL = "https://www.instagram.com/direct/inbox/"
+                    } else {
+                        notifBody = "You have new activity on Instagram"
+                        notifURL = "https://www.instagram.com/accounts/activity/"
+                    }
 
                     await self.scheduleLocalNotification(
                         title: "Instagram",
-                        body: "You have new activity on Instagram",
-                        url: "https://www.instagram.com/accounts/activity/"
+                        body: notifBody,
+                        url: notifURL
                     )
                 }
             }
