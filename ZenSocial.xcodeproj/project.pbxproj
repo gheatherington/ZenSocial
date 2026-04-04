@@ -474,11 +474,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ZenSocial/ZenSocial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< Updated upstream
-				CURRENT_PROJECT_VERSION = 1;
-=======
-				CURRENT_PROJECT_VERSION = 1;
->>>>>>> Stashed changes
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = SZKSGJZ726;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_ADDITIONS_FILE = ZenSocial/Info.plist;
@@ -511,11 +507,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ZenSocial/ZenSocial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< Updated upstream
-				CURRENT_PROJECT_VERSION = 1;
-=======
-				CURRENT_PROJECT_VERSION = 1;
->>>>>>> Stashed changes
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = SZKSGJZ726;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_ADDITIONS_FILE = ZenSocial/Info.plist;
@@ -546,11 +538,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< Updated upstream
-				CURRENT_PROJECT_VERSION = 1;
-=======
-				CURRENT_PROJECT_VERSION = 1;
->>>>>>> Stashed changes
+				CURRENT_PROJECT_VERSION = 2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
@@ -567,11 +555,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< Updated upstream
-				CURRENT_PROJECT_VERSION = 1;
-=======
-				CURRENT_PROJECT_VERSION = 1;
->>>>>>> Stashed changes
+				CURRENT_PROJECT_VERSION = 2;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MARKETING_VERSION = 1.0;
