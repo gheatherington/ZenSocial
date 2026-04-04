@@ -475,9 +475,9 @@
 				CODE_SIGN_ENTITLEMENTS = ZenSocial/ZenSocial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 <<<<<<< Updated upstream
-				CURRENT_PROJECT_VERSION = ;
+				CURRENT_PROJECT_VERSION = 1;
 =======
-				CURRENT_PROJECT_VERSION = ;
+				CURRENT_PROJECT_VERSION = 1;
 >>>>>>> Stashed changes
 				DEVELOPMENT_TEAM = SZKSGJZ726;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -512,9 +512,9 @@
 				CODE_SIGN_ENTITLEMENTS = ZenSocial/ZenSocial.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 <<<<<<< Updated upstream
-				CURRENT_PROJECT_VERSION = ;
+				CURRENT_PROJECT_VERSION = 1;
 =======
-				CURRENT_PROJECT_VERSION = ;
+				CURRENT_PROJECT_VERSION = 1;
 >>>>>>> Stashed changes
 				DEVELOPMENT_TEAM = SZKSGJZ726;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -547,9 +547,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 <<<<<<< Updated upstream
-				CURRENT_PROJECT_VERSION = ;
+				CURRENT_PROJECT_VERSION = 1;
 =======
-				CURRENT_PROJECT_VERSION = ;
+				CURRENT_PROJECT_VERSION = 1;
 >>>>>>> Stashed changes
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -568,9 +568,9 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 <<<<<<< Updated upstream
-				CURRENT_PROJECT_VERSION = ;
+				CURRENT_PROJECT_VERSION = 1;
 =======
-				CURRENT_PROJECT_VERSION = ;
+				CURRENT_PROJECT_VERSION = 1;
 >>>>>>> Stashed changes
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
