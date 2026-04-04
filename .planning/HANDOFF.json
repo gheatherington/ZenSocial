@@ -1,0 +1,49 @@
+{
+  "version": "1.0",
+  "timestamp": "2026-04-04T12:52:20.981Z",
+  "phase": "03",
+  "phase_name": "push-notifications",
+  "phase_dir": ".planning/phases/03-push-notifications",
+  "plan": 3,
+  "task": 1,
+  "total_tasks": 1,
+  "status": "human_verification_pending",
+  "completed_tasks": [
+    {"id": "03-00", "name": "XCTest target + 4 notification test stubs", "status": "done", "commit": "d19b6fc"},
+    {"id": "03-01-t1", "name": "NotificationManager, AppDelegate bridge, entitlements, REQUIREMENTS.md", "status": "done", "commit": "70cf627"},
+    {"id": "03-01-t2", "name": "Permission flow UI — pre-prompt, login detection, Settings toggle", "status": "done", "commit": "70cf627"},
+    {"id": "03-02-t1", "name": "JS notification bridge + NotificationPoller + BGAppRefreshTask", "status": "done", "commit": "6ef64a4"},
+    {"id": "03-02-t2", "name": "Deep-link routing on notification tap", "status": "done", "commit": "fc2013a"}
+  ],
+  "remaining_tasks": [
+    {"id": "03-03", "name": "Human UAT — 4 items pending device testing", "status": "awaiting_human"}
+  ],
+  "blockers": [
+    {
+      "description": "xcodebuild CLI can't find simulator destination (SDK 26.4 vs runtime 26.2 mismatch)",
+      "type": "technical",
+      "workaround": "Use Xcode app directly — open ZenSocial.xcodeproj, press ⌘R to build and run on iPhone 17 simulator"
+    }
+  ],
+  "human_actions_pending": [
+    {
+      "action": "Build and run in Xcode (⌘R), then test 4 UAT items in 03-HUMAN-UAT.md",
+      "context": "Verifier confirmed all 5 must-haves are code-complete. Only runtime behavior needs human confirmation.",
+      "blocking": true
+    },
+    {
+      "action": "Reply 'approved' in new session after tests pass, or describe failures for gap closure",
+      "context": "Triggers phase completion: ROADMAP/STATE update, next phase routing",
+      "blocking": true
+    }
+  ],
+  "decisions": [
+    {"decision": "On-device only scope (no backend APNs relay)", "rationale": "Avoids server infrastructure; foreground + BGAppRefreshTask covers the stated use case", "phase": "03"},
+    {"decision": "NotificationManager as @Observable @MainActor singleton", "rationale": "Consistent with app's Observation framework pattern; accessible from any Swift file", "phase": "03"},
+    {"decision": "Pre-prompt as ViewModifier (.alert) not a sheet", "rationale": "Lightweight, non-intrusive; fits ZenSocial's calm design ethos", "phase": "03"},
+    {"decision": "Login detection via URL transition away from /accounts/login", "rationale": "Most reliable signal without JS injection; fires in didFinish navigation delegate", "phase": "03"}
+  ],
+  "uncommitted_files": [],
+  "next_action": "In new session: run /gsd:resume-work, then tell user to open Xcode and run the 4 UAT tests in 03-HUMAN-UAT.md. After user replies 'approved', call `node gsd-tools.cjs phase complete 03` and run update_roadmap step.",
+  "context_notes": "Phase 3 is fully code-complete. All 3 execution plans ran (03-00, 03-01, 03-02). Verifier gave human_needed status — 5/5 must-haves verified at code level, 4 items need device/simulator testing. The project.pbxproj had merge conflict markers that were cleaned up and committed. VERSION tracking got confused during merge (chore commits show [build 1],[build 2] etc. instead of incrementing from 32 — this is a cosmetic issue with the commit hook, not a real problem). Xcode is open and ready to build."
+}
