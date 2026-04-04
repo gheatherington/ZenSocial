@@ -269,49 +269,53 @@ class NotificationPoller: NSObject {
 
 // MARK: - WKScriptMessageHandler Conformance
 
-/// WKScriptMessageHandler is called from WebKit's internal queue (nonisolated context in Swift 6).
-/// WKScriptMessage.name and .body are @MainActor-isolated in iOS 26 SDK, so we use
-/// MainActor.assumeIsolated to safely access them — WebKit guarantees delivery on the main thread.
+/// WKScriptMessageHandler is nonisolated in Swift 6 strict concurrency.
+/// Although WebKit normally calls this on the main thread, edge cases (web process
+/// crash recovery, cross-process navigation) may violate that guarantee.
+/// We use Task { @MainActor in } to safely hop to the main actor without assuming
+/// the current thread — avoiding a fatal trap from MainActor.assumeIsolated.
 extension NotificationPoller: WKScriptMessageHandler {
     nonisolated func userContentController(
         _ userContentController: WKUserContentController,
         didReceive message: WKScriptMessage
     ) {
-        // WebKit calls this on the main thread; assumeIsolated is safe here.
-        MainActor.assumeIsolated {
-            guard message.name == "zenNotification",
-                  let body = message.body as? [String: Any],
+        // Extract message data while still in the callback context.
+        // WKScriptMessage.name and .body are safe to read here (same thread as caller).
+        let messageName = message.name
+        let messageBody = message.body
+
+        Task { @MainActor in
+            guard messageName == "zenNotification",
+                  let body = messageBody as? [String: Any],
                   let type = body["type"] as? String
             else { return }
 
-            Task { @MainActor in
-                guard NotificationManager.shared.userWantsNotifications,
-                      NotificationManager.shared.authorizationStatus == .authorized
-                else { return }
+            guard NotificationManager.shared.userWantsNotifications,
+                  NotificationManager.shared.authorizationStatus == .authorized
+            else { return }
 
-                if type == "badge_change" {
-                    let timestamp = body["timestamp"] as? TimeInterval ?? Date().timeIntervalSince1970 * 1000
-                    let epochSeconds = timestamp / 1000.0
-                    guard epochSeconds > self.lastForegroundNotificationEpoch + 30 else { return }
-                    self.lastForegroundNotificationEpoch = epochSeconds
+            if type == "badge_change" {
+                let timestamp = body["timestamp"] as? TimeInterval ?? Date().timeIntervalSince1970 * 1000
+                let epochSeconds = timestamp / 1000.0
+                guard epochSeconds > NotificationPoller.shared.lastForegroundNotificationEpoch + 30 else { return }
+                NotificationPoller.shared.lastForegroundNotificationEpoch = epochSeconds
 
-                    let badgeType = body["badgeType"] as? String ?? "activity"
-                    let notifBody: String
-                    let notifURL: String
-                    if badgeType == "dm" {
-                        notifBody = "You have a new direct message on Instagram"
-                        notifURL = "https://www.instagram.com/direct/inbox/"
-                    } else {
-                        notifBody = "You have new activity on Instagram"
-                        notifURL = "https://www.instagram.com/accounts/activity/"
-                    }
-
-                    await self.scheduleLocalNotification(
-                        title: "Instagram",
-                        body: notifBody,
-                        url: notifURL
-                    )
+                let badgeType = body["badgeType"] as? String ?? "activity"
+                let notifBody: String
+                let notifURL: String
+                if badgeType == "dm" {
+                    notifBody = "You have a new direct message on Instagram"
+                    notifURL = "https://www.instagram.com/direct/inbox/"
+                } else {
+                    notifBody = "You have new activity on Instagram"
+                    notifURL = "https://www.instagram.com/accounts/activity/"
                 }
+
+                await NotificationPoller.shared.scheduleLocalNotification(
+                    title: "Instagram",
+                    body: notifBody,
+                    url: notifURL
+                )
             }
         }
     }
